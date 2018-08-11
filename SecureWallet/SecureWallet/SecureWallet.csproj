@@ -99,8 +99,10 @@
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Adapter\StoredInfoAdapter.cs" />
     <Compile Include="Fragment\AddInfo.cs" />
+    <Compile Include="Fragment\AutenticationDialog.cs" />
     <Compile Include="Fragment\StoredDetails.cs" />
     <Compile Include="Helper\AlertBox.cs" />
+    <Compile Include="Helper\Constants.cs" />
     <Compile Include="Helper\FileOperationManager.cs" />
     <Compile Include="Helper\FileOperations.cs" />
     <Compile Include="Helper\FingerPrintHandler.cs" />

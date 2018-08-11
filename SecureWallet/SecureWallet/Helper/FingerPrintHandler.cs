@@ -1,4 +1,6 @@
-﻿using Android;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Android;
 using Android.Content;
 using Android.Hardware.Fingerprints;
 using Android.OS;
@@ -9,10 +11,12 @@ namespace SecureWallet
     public class FingerPrintHandler : FingerprintManager.AuthenticationCallback
     {
         private Context context;
-        internal bool isAuthenticationSucess;
-        public FingerPrintHandler(Context context)
+        private AutenticationDialog autDialog;
+        int counter;
+        public FingerPrintHandler(Context context, AutenticationDialog autDialog)
         {
             this.context = context;
+            this.autDialog = autDialog;
         }
 
         internal void StartAuthentication(FingerprintManager fingerprintManager, FingerprintManager.CryptoObject cryptoObject)
@@ -28,11 +32,34 @@ namespace SecureWallet
 
         public override void OnAuthenticationFailed()
         {
-            isAuthenticationSucess = false;
+            counter++;
+
+            
+            if (counter==3)
+            {
+                SensorMsgChange(Constants.AutenticationFailedMessage);
+                Thread.Sleep(1000);
+                autDialog.Dismiss();
+            }
+
+            else
+            {
+                SensorMsgChange(Constants.AutenticationRetryMessage);
+                
+            }
         }
         public override void OnAuthenticationSucceeded(FingerprintManager.AuthenticationResult result)
         {
-            isAuthenticationSucess = true;
+            autDialog.Dismiss();
+            autDialog.AutenticationSucess();
+        }
+
+        private void SensorMsgChange(string msg)
+        {
+            autDialog.txtAutenticationMsg.Text = msg;
+            autDialog.txtAutenticationMsg.SetTextColor(Android.Graphics.Color.Red);
+           
+           
         }
     }
 }

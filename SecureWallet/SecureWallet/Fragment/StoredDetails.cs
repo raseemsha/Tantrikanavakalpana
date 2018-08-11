@@ -237,10 +237,22 @@ namespace SecureWallet
         {
             if(cryptoObject!=null)
             {
-                AlertBox.AuthenticatePopUp(Activity);
-                FingerPrintHandler handler = new FingerPrintHandler(Activity);
-                handler.StartAuthentication(fingerprintManager, cryptoObject);
-                return ! handler.isAuthenticationSucess;
+                Android.Support.V4.App.FragmentTransaction fragmentTransaction = FragmentManager.BeginTransaction();
+                Android.Support.V4.App.Fragment previousFragment = FragmentManager.FindFragmentByTag("AuthenticateDialog");
+                if (previousFragment != null)
+                {
+                    fragmentTransaction.Remove(previousFragment);
+                }
+                AutenticationDialog autDialog = new AutenticationDialog(fingerprintManager,cryptoObject,Activity);
+
+                autDialog.EventTrigger += delegate
+                  {
+                      parent.ExpandGroup(groupPosition);
+                  };
+                autDialog.Show(fragmentTransaction, "AuthenticateDialog");
+                
+                
+                
             }
             
             return true;
