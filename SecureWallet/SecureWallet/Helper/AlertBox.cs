@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace SecureCredentials
+namespace SecureWallet
 {
     public class AlertBox
     {

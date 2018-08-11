@@ -2,8 +2,9 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/SecureCredentials/.vs/SecureCredentials/v14
-/SecureCredentials/packages
-/SecureCredentials/SecureCredentials/bin/Debug
-/SecureCredentials/SecureCredentials/obj/Debug
-/SecureCredentials/SecureCredentials/Resources/Resource.Designer.cs
+
+/SecureWallet/packages
+/SecureWallet/SecureWallet/obj/Debug
+/SecureWallet/SecureWallet/Resources/Resource.Designer.cs
+/SecureWallet/SecureWallet/bin/Debug
+/SecureWallet/SecureWallet/obj/.cache

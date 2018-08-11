@@ -1,4 +1,4 @@
-﻿namespace SecureCredentials
+﻿namespace SecureWallet
 {
     public class AddInfoModel
     {

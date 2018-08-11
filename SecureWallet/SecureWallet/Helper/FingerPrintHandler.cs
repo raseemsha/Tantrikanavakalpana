@@ -4,7 +4,7 @@ using Android.Hardware.Fingerprints;
 using Android.OS;
 using Android.Support.V4.Content;
 
-namespace SecureCredentials
+namespace SecureWallet
 {
     public class FingerPrintHandler : FingerprintManager.AuthenticationCallback
     {

@@ -4,7 +4,7 @@ using Android.Views;
 using Android.Widget;
 using System.Linq;
 
-namespace SecureCredentials
+namespace SecureWallet
 {
     public class AddInfo : Android.Support.V4.App.Fragment
     {

@@ -5,7 +5,7 @@ using Android.Widget;
 using Java.Lang;
 using System.Collections.Generic;
 
-namespace SecureCredentials
+namespace SecureWallet
 {
     
     public class StoredInfoAdapter : BaseExpandableListAdapter
