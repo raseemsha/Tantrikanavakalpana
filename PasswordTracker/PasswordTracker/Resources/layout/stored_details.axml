@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="top"
+    android:layout_weight="1"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:scrollbars="none">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentTop="true"
+        android:text="Stored Informations"
+        android:textStyle="bold"/>
+
+    <ExpandableListView
+        android:id="@+id/expLstItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="10dp"
+
+        android:divider="@null"
+        android:background="@null"
+        android:groupIndicator="@null"
+        android:padding="5dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/card_view_bottom"
+        android:layout_marginBottom="35dp"
+        android:layout_below="@+id/expLstItems"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/llfabAddData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_above="@+id/llfabUpdateData"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="5dp"
+            android:text="Add info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <android.support.design.widget.FloatingActionButton
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:backgroundTint="@color/blue"
+            android:tint="@color/white"
+            android:src="@drawable/add_data" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/llfabUpdateData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_above="@+id/fabMain"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        android:layout_margin="10dp">
+        <TextView
+            android:text="Update info"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <android.support.design.widget.FloatingActionButton
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:backgroundTint="@color/blue"
+            android:tint="@color/white"
+            android:src="@drawable/update_data" />
+    </LinearLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        app:backgroundTint="@color/blue"
+        android:tint="@color/white"
+        android:src="@drawable/ic_add" />
+
+</RelativeLayout>
+
+

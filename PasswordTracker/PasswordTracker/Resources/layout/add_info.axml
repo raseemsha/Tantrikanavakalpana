@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+
+  <TextView
+      android:id="@+id/txtTitle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp"
+      android:text="Add information"
+      android:textStyle="bold"/>
+
+  <EditText
+      android:id="@+id/edtTitle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Please enter title"
+      android:layout_margin="10dp"
+      android:inputType="text"
+      android:imeOptions="actionNext"
+        />
+  <EditText
+      android:id="@+id/edtUserId"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Please enter user id"
+      android:layout_margin="10dp"
+      android:inputType="text"
+      android:imeOptions="actionNext"
+        />
+
+  <EditText
+      android:id="@+id/edtPassword"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="text"
+      android:hint="Please enter password"
+      android:layout_margin="10dp"
+      android:imeOptions="actionNext"
+        />
+
+
+
+  <EditText
+      android:id="@+id/edtAdditionalInfo"
+      android:gravity="top|left"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      
+      android:layout_margin="10dp"
+      android:background="@drawable/edt_rect_border"
+
+      android:hint="Please enter additional info"
+
+
+      android:inputType="textFilter|textMultiLine"
+
+      android:minHeight="148dp"
+      
+
+        />
+
+  <Button
+     android:id="@+id/btnAdditionalInfo"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom"
+      android:text="Add Info"
+      android:background="@color/blue"
+      android:textColor="@color/white"
+      android:layout_marginTop="61dp" />
+</LinearLayout>

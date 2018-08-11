@@ -1,0 +1,136 @@
+﻿using Android.App;
+using Android.Content;
+using Android.Views;
+using Android.Widget;
+using Java.Lang;
+using System.Collections.Generic;
+
+namespace PasswordTracker
+{
+    
+    public class StoredInfoAdapter : BaseExpandableListAdapter
+    {
+        private List<AddInfoModel> listValues;
+        LayoutInflater layoutInflator;
+        Context context;
+        ExpandableListView.IOnGroupClickListener listner;
+        public StoredInfoAdapter(Activity context,List<AddInfoModel> listValues)
+        {
+            this.context = context;
+            this.listValues = listValues;
+            layoutInflator = (LayoutInflater)this.context.GetSystemService(Context.LayoutInflaterService);
+           
+        }
+
+        public override int GroupCount
+        {
+            get
+            {
+                return listValues.Count;
+            }
+            
+        }
+        
+
+        public override bool HasStableIds
+        {
+            get
+            {
+                return true;
+            }
+        }
+        
+
+        public override Object GetChild(int groupPosition, int childPosition)
+        {
+            return null;
+        }
+
+        public override long GetChildId(int groupPosition, int childPosition)
+        {
+            return childPosition;
+        }
+
+        public override int GetChildrenCount(int groupPosition)
+        {
+            return 1;
+        }
+
+        public override View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView, ViewGroup parent)
+        {
+            convertView = layoutInflator.Inflate(Resource.Layout.show_item_child_adapter, parent, false);
+            TextView txtUserId= convertView.FindViewById<TextView>(Resource.Id.txtUserIdValue);
+            TextView txtPassword = convertView.FindViewById<TextView>(Resource.Id.txtPasswordValue);
+            TextView txtAdditionalInfo = convertView.FindViewById<TextView>(Resource.Id.txtAdditionalInfo);
+            ImageView imgDelete= convertView.FindViewById<ImageView>(Resource.Id.imgDelete);
+            ImageView imgEdit = convertView.FindViewById<ImageView>(Resource.Id.imgEdit);
+            imgDelete.Click += delegate
+            {
+                FileOperations.DeleteSingleEntryFromTable("AddInfoModel",string.Format("Title ='{0}'", listValues[groupPosition].Title));
+                listValues.RemoveAt(groupPosition);
+                NotifyDataSetChanged();
+            };
+            imgEdit.Click += delegate
+            {
+
+            };
+            txtUserId.Text = listValues[groupPosition].UserId;
+            txtPassword.Text = listValues[groupPosition].Password;
+            if(string.IsNullOrEmpty(listValues[groupPosition].AdditionalInformation))
+            {
+                txtAdditionalInfo.Visibility = ViewStates.Gone;
+            }
+            else
+            {
+                txtAdditionalInfo.Visibility = ViewStates.Visible;
+                txtAdditionalInfo.Text = listValues[groupPosition].AdditionalInformation;
+            }
+            
+
+
+            return convertView;
+        }
+
+      
+
+     
+
+      
+        public override Object GetGroup(int groupPosition)
+        {
+            return groupPosition;
+        }
+
+        public override long GetGroupId(int groupPosition)
+        {
+            return groupPosition;
+        }
+
+        public override View GetGroupView(int groupPosition, bool isExpanded, View convertView, ViewGroup parent)
+        {
+            var titleName = listValues[groupPosition].Title;
+            convertView = layoutInflator.Inflate(Resource.Layout.show_item_parent_adapter, parent, false);
+            TextView txtTopicTitle = convertView.FindViewById<TextView>(Resource.Id.txtHeaderTitle);
+            ImageView imgView = convertView.FindViewById<ImageView>(Resource.Id.imgExpandCollapseIndicator);
+
+            if(isExpanded)
+            {
+                imgView.SetImageResource(Resource.Drawable.ic_up_arrow);
+            }
+            else
+            {
+                imgView.SetImageResource(Resource.Drawable.ic_down_arrow);
+            }
+
+            txtTopicTitle.Text = titleName;
+            return convertView;
+        }
+
+        public override bool IsChildSelectable(int groupPosition, int childPosition)
+        {
+            return true;
+        }
+
+       
+    }
+}
