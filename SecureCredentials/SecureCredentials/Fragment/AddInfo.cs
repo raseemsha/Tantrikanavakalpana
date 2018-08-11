@@ -4,7 +4,7 @@ using Android.Views;
 using Android.Widget;
 using System.Linq;
 
-namespace PasswordTracker
+namespace SecureCredentials
 {
     public class AddInfo : Android.Support.V4.App.Fragment
     {

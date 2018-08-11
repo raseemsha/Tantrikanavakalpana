@@ -5,7 +5,7 @@ using Android.Widget;
 using Java.Lang;
 using System.Collections.Generic;
 
-namespace PasswordTracker
+namespace SecureCredentials
 {
     
     public class StoredInfoAdapter : BaseExpandableListAdapter

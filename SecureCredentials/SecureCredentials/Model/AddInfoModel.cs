@@ -1,4 +1,4 @@
-﻿namespace PasswordTracker
+﻿namespace SecureCredentials
 {
     public class AddInfoModel
     {

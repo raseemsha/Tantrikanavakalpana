@@ -20,7 +20,7 @@ using Android;
 using Android.Support.V4.App;
 using Android.Security.Keystore;
 
-namespace PasswordTracker
+namespace SecureCredentials
 {
     public class StoredDetails : Android.Support.V4.App.Fragment, ExpandableListView.IOnGroupClickListener
     {

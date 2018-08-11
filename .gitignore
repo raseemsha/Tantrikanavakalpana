@@ -3,3 +3,7 @@
 ################################################################################
 
 /SecureCredentials/.vs/SecureCredentials/v14
+/SecureCredentials/packages
+/SecureCredentials/SecureCredentials/bin/Debug
+/SecureCredentials/SecureCredentials/obj/Debug
+/SecureCredentials/SecureCredentials/Resources/Resource.Designer.cs

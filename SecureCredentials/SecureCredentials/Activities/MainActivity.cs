@@ -4,10 +4,10 @@ using Android.OS;
 using Android.Views;
 using Android.Support.V7.App;
 
-namespace PasswordTracker
+namespace SecureCredentials
 {
     
-    [Activity(Label = "PasswordTracker", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, WindowSoftInputMode = Android.Views.SoftInput.AdjustPan | SoftInput.StateAlwaysHidden)]
+    [Activity(Label = "SecureCredentials", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, WindowSoftInputMode = Android.Views.SoftInput.AdjustPan | SoftInput.StateAlwaysHidden)]
     public class MainActivity : AppCompatActivity
     {
         private View view = null;

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PasswordTracker
+namespace SecureCredentials
 {
     /// <summary>
     /// This class helps in sqllite data base call and updation
