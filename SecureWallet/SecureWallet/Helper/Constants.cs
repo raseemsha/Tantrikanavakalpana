@@ -17,5 +17,11 @@ namespace SecureWallet
         public const string AutenticationRetryMessage = "Finger print was not recognised.Please try again.";
         public const string TouchSensor = "Touch sensor.";
         public const string AutenticationFailedMessage = "Too many attempts.Autentication failed.";
+        public const string Wallet = "Wallet";
+        public const string AddInfo = "Add Information";
+        public const string AppExit = "Are you sure you want to exit the application ?";
+
+        public const string StoredDetailsFragment = "StoredDetailsFragment";
+        public const string AddInfoFragment = "AddInfoFragment";
     }
 }

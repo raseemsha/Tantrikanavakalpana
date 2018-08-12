@@ -14,6 +14,47 @@ namespace SecureWallet
 {
     public class AlertBox
     {
+       
+
+        public static void CreateYesNoAlertBox(string titleOfBox, string message, Context context, Action yesFuntion, Action cancelFunction, int btn1Text, int btn2Text)
+        {
+            try
+            {
+                if (context != null)
+                {
+                    Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(context);
+                    alert.SetTitle(titleOfBox);
+                    alert.SetMessage(message);
+                    if (yesFuntion == null)
+                    {
+                        alert.SetPositiveButton(btn1Text, (EventHandler<DialogClickEventArgs>)null);
+                    }
+                    else
+                    {
+                        alert.SetPositiveButton(btn1Text, delegate { yesFuntion(); });
+                    }
+
+                    if (cancelFunction == null)
+                    {
+                        alert.SetNegativeButton(btn2Text, (EventHandler<DialogClickEventArgs>)null);
+                    }
+                    else
+                    {
+                        alert.SetNegativeButton(btn2Text, delegate { cancelFunction(); });
+                    }
+                    alert.SetCancelable(true);
+                    
+                    if (!((Android.App.Activity)context).IsFinishing)
+                    {
+                        alert.Show();
+                    }
+                }
+            }
+            catch 
+            {
+                
+            }
+        }
         public static void CreateOkAlertBox(string titleOfBox, string message, Context context, Action okFunction)
         {
             try

@@ -1,5 +1,5 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿
+using System.Timers;
 using Android;
 using Android.Content;
 using Android.Hardware.Fingerprints;
@@ -13,6 +13,7 @@ namespace SecureWallet
         private Context context;
         private AutenticationDialog autDialog;
         int counter;
+        private Timer messageChangeTimer;
         public FingerPrintHandler(Context context, AutenticationDialog autDialog)
         {
             this.context = context;
@@ -33,23 +34,34 @@ namespace SecureWallet
         public override void OnAuthenticationFailed()
         {
             counter++;
+            if(counter > 3)
+            {
+                return;
+            }
+            StopTimer();
+            
 
             
             if (counter==3)
             {
                 SensorMsgChange(Constants.AutenticationFailedMessage);
-                Thread.Sleep(1000);
-                autDialog.Dismiss();
+
+                StartTimer(Constants.TouchSensor,true);
             }
 
             else
             {
                 SensorMsgChange(Constants.AutenticationRetryMessage);
-                
+                StartTimer(Constants.TouchSensor);
             }
         }
         public override void OnAuthenticationSucceeded(FingerprintManager.AuthenticationResult result)
         {
+            if(counter>3)
+            {
+                return;
+            }
+            StopTimer();
             autDialog.Dismiss();
             autDialog.AutenticationSucess();
         }
@@ -60,6 +72,33 @@ namespace SecureWallet
             autDialog.txtAutenticationMsg.SetTextColor(Android.Graphics.Color.Red);
            
            
+        }
+
+        public void StartTimer(string msg,bool dismissRequired=false)
+        {
+
+            messageChangeTimer = new Timer();
+            messageChangeTimer.Interval = 2* 1000;//Time should be in milliseconds
+            if(dismissRequired)
+            {
+                messageChangeTimer.Elapsed += delegate { autDialog.Dismiss(); }; 
+            }
+            else
+            {
+                messageChangeTimer.Elapsed += delegate { SensorMsgChange(msg); autDialog.txtAutenticationMsg.SetTextColor(Android.Graphics.Color.Black); };
+            }
+           
+            messageChangeTimer.Enabled = true;
+        }
+
+        public  void StopTimer()
+        {
+
+            if (messageChangeTimer != null)
+            {
+                messageChangeTimer.Stop();
+                messageChangeTimer.Enabled = false;
+            }
         }
     }
 }

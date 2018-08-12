@@ -37,6 +37,8 @@ namespace SecureWallet
 
         private void InititateControls()
         {
+            AppBarManager.ShowBackButtonInAppBar();
+            AppBarManager.SetTitle(Constants.AddInfo);
             edtTitle = view.FindViewById<EditText>(Resource.Id.edtTitle);
             edtUserId = view.FindViewById<EditText>(Resource.Id.edtUserId);
             edtPassword = view.FindViewById<EditText>(Resource.Id.edtPassword);

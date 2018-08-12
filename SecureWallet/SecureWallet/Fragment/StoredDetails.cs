@@ -186,6 +186,8 @@ namespace SecureWallet
 
         private void InititateControls()
         {
+            AppBarManager.HideIcons();
+            AppBarManager.SetTitle(Constants.Wallet);
             fabMain = view.FindViewById<FloatingActionButton>(Resource.Id.fabMain);
             llfabUpdateData = view.FindViewById<LinearLayout>(Resource.Id.llfabUpdateData);
             llfabAddData = view.FindViewById<LinearLayout>(Resource.Id.llfabAddData);
@@ -194,11 +196,22 @@ namespace SecureWallet
             llfabUpdateData.Click += LlfabUpdateData_Click;
             llfabAddData.Click += LlfabAddData_Click;
             explstTrainingTopics.SetOnGroupClickListener(this);
+            CloseAllList();
 
 
         }
 
-     
+        private void CloseAllList()
+        {
+            if(explstTrainingTopics != null&& lstStoredData!=null&& lstStoredData.Count>0)
+            {
+                for (int i = 0; i < lstStoredData.Count; i++)
+                {
+                    explstTrainingTopics.CollapseGroup(i);
+                }
+            }
+            
+        }
 
         private void LlfabAddData_Click(object sender, EventArgs e)
         {
@@ -235,25 +248,37 @@ namespace SecureWallet
 
         public bool OnGroupClick(ExpandableListView parent, View clickedView, int groupPosition, long id)
         {
-            if(cryptoObject!=null)
-            {
-                Android.Support.V4.App.FragmentTransaction fragmentTransaction = FragmentManager.BeginTransaction();
-                Android.Support.V4.App.Fragment previousFragment = FragmentManager.FindFragmentByTag("AuthenticateDialog");
-                if (previousFragment != null)
-                {
-                    fragmentTransaction.Remove(previousFragment);
-                }
-                AutenticationDialog autDialog = new AutenticationDialog(fingerprintManager,cryptoObject,Activity);
+            if(!(parent.IsGroupExpanded(groupPosition)))
 
-                autDialog.EventTrigger += delegate
-                  {
-                      parent.ExpandGroup(groupPosition);
-                  };
-                autDialog.Show(fragmentTransaction, "AuthenticateDialog");
-                
-                
-                
+            {
+                CloseAllList();
+
+                if (cryptoObject != null)
+                {
+                    Android.Support.V4.App.FragmentTransaction fragmentTransaction = FragmentManager.BeginTransaction();
+                    Android.Support.V4.App.Fragment previousFragment = FragmentManager.FindFragmentByTag("AuthenticateDialog");
+                    if (previousFragment != null)
+                    {
+                        fragmentTransaction.Remove(previousFragment);
+                    }
+                    AutenticationDialog autDialog = new AutenticationDialog(fingerprintManager, cryptoObject, Activity);
+
+                    autDialog.EventTrigger += delegate
+                    {
+                        parent.ExpandGroup(groupPosition);
+                    };
+                    autDialog.Show(fragmentTransaction, "AuthenticateDialog");
+
+
+
+                }
             }
+
+            else
+            {
+                parent.CollapseGroup(groupPosition);
+            }
+            
             
             return true;
         }
