@@ -38,6 +38,8 @@ namespace SecureWallet
         FingerprintManager.CryptoObject cryptoObject;
         KeyguardManager keyguardManager;
         FingerprintManager fingerprintManager;
+        private TextView txtStoreInfoHeader;
+        private View viewExpLst;
         public StoredDetails()
         {
             lstStoredData = new List<AddInfoModel>();
@@ -146,6 +148,11 @@ namespace SecureWallet
                 {
                     BindData();
                 }
+                else
+                {
+                    viewExpLst.Visibility = ViewStates.Gone;
+                    txtStoreInfoHeader.Visibility = ViewStates.Gone;
+                }
             }
 
             catch
@@ -157,13 +164,22 @@ namespace SecureWallet
 
         private void BindData()
         {
-            
-                storedInfoAdapter = new StoredInfoAdapter(Activity, lstStoredData);
-                explstTrainingTopics.SetAdapter(storedInfoAdapter);
+
+            SetHeader();
+            storedInfoAdapter = new StoredInfoAdapter(Activity, lstStoredData,this);
+            explstTrainingTopics.SetAdapter(storedInfoAdapter);
            
+            CloseAllList();
 
-            
 
+
+        }
+
+        public void SetHeader()
+        {
+            viewExpLst.Visibility = ViewStates.Visible;
+            txtStoreInfoHeader.Visibility = ViewStates.Visible;
+            txtStoreInfoHeader.Text = string.Format(Constants.StoreDetailsHeader, lstStoredData.Count);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -188,10 +204,12 @@ namespace SecureWallet
         {
             AppBarManager.HideIcons();
             AppBarManager.SetTitle(Constants.Wallet);
+            txtStoreInfoHeader= view.FindViewById<TextView>(Resource.Id.txtStoreInfoHeader);
             fabMain = view.FindViewById<FloatingActionButton>(Resource.Id.fabMain);
             llfabUpdateData = view.FindViewById<LinearLayout>(Resource.Id.llfabUpdateData);
             llfabAddData = view.FindViewById<LinearLayout>(Resource.Id.llfabAddData);
             explstTrainingTopics= view.FindViewById<ExpandableListView>(Resource.Id.expLstItems);
+            viewExpLst = view.FindViewById<View>(Resource.Id.viewExpLst);
             fabMain.Click += FabMain_Click;
             llfabUpdateData.Click += LlfabUpdateData_Click;
             llfabAddData.Click += LlfabAddData_Click;

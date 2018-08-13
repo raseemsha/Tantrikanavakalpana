@@ -1,5 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Graphics;
+using Android.Support.V4.Content;
 using Android.Views;
 using Android.Widget;
 using Java.Lang;
@@ -14,8 +16,11 @@ namespace SecureWallet
         LayoutInflater layoutInflator;
         Context context;
         ExpandableListView.IOnGroupClickListener listner;
-        public StoredInfoAdapter(Activity context,List<AddInfoModel> listValues)
+        private StoredDetails storedDetails;
+        
+        public StoredInfoAdapter(Activity context,List<AddInfoModel> listValues, StoredDetails storedDetails)
         {
+            this.storedDetails = storedDetails;
             this.context = context;
             this.listValues = listValues;
             layoutInflator = (LayoutInflater)this.context.GetSystemService(Context.LayoutInflaterService);
@@ -69,6 +74,8 @@ namespace SecureWallet
                 FileOperations.DeleteSingleEntryFromTable("AddInfoModel",string.Format("Title ='{0}'", listValues[groupPosition].Title));
                 listValues.RemoveAt(groupPosition);
                 NotifyDataSetChanged();
+                storedDetails.SetHeader();
+
             };
             imgEdit.Click += delegate
             {
@@ -112,13 +119,17 @@ namespace SecureWallet
             convertView = layoutInflator.Inflate(Resource.Layout.show_item_parent_adapter, parent, false);
             TextView txtTopicTitle = convertView.FindViewById<TextView>(Resource.Id.txtHeaderTitle);
             ImageView imgView = convertView.FindViewById<ImageView>(Resource.Id.imgExpandCollapseIndicator);
-
-            if(isExpanded)
+            ImageView imgLockUnLock = convertView.FindViewById<ImageView>(Resource.Id.imgLockUnLock);
+            if (isExpanded)
             {
+                imgLockUnLock.SetImageResource(Resource.Drawable.ic_unlock);
+                imgLockUnLock.SetColorFilter(new Color(ContextCompat.GetColor(context, Resource.Color.red)), PorterDuff.Mode.SrcAtop);
                 imgView.SetImageResource(Resource.Drawable.ic_up_arrow);
             }
             else
             {
+                imgLockUnLock.SetImageResource(Resource.Drawable.ic_lock);
+                imgLockUnLock.SetColorFilter(new Color(ContextCompat.GetColor(context, Resource.Color.green)), PorterDuff.Mode.SrcAtop);
                 imgView.SetImageResource(Resource.Drawable.ic_down_arrow);
             }
 

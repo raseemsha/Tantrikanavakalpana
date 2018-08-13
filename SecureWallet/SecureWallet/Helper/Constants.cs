@@ -21,6 +21,8 @@ namespace SecureWallet
         public const string AddInfo = "Add Information";
         public const string AppExit = "Are you sure you want to exit the application ?";
 
+
+        public const string StoreDetailsHeader = "Secured Informations :{0}";
         public const string StoredDetailsFragment = "StoredDetailsFragment";
         public const string AddInfoFragment = "AddInfoFragment";
     }

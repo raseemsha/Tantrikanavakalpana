@@ -4,6 +4,7 @@ using Android.Graphics.Drawables;
 
 using Android.Graphics;
 using Android;
+using Android.Support.V4.Content;
 
 namespace SecureWallet
 {
@@ -24,9 +25,9 @@ namespace SecureWallet
             mActionBar = mActionbarToBeSet;
 
             //Initialise the Drawer Icons
-           
-            navIconBack = activity.Resources.GetDrawable(Resource.Drawable.ic_back);
-            navIconBack.SetColorFilter(activity.Resources.GetColor(Resource.Color.black), PorterDuff.Mode.SrcAtop);
+            navIconBack = ContextCompat.GetDrawable(activity, Resource.Drawable.ic_back);
+            
+            navIconBack.SetColorFilter(new Color(ContextCompat.GetColor(activity, Resource.Color.white)), PorterDuff.Mode.SrcAtop);
 
             //Set the drawer to show hamburger icon
             mActionBar.SetDisplayHomeAsUpEnabled(true);
