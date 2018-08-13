@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Common strings-->
+    <string name="app_name">Sam.Droid</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="retry">Retry</string>
+    <string name="cancel">Cancel</string>
+    <string name="exit">Exit</string>
+    <string name="dismiss">DISMISS</string>
+    <string name="yesContinue">Continue</string>
+    <string name="upload">Upload</string>
+    <string name="ok">OK</string>
+    <string name="empty">Empty</string>
+    <string name="logout">Logout</string>
+    <string name="connect">Connect</string>
+    <string name="change">Change</string>
+
+    <string name="call">Call</string>
+    <string name="remove">REMOVE</string>
+    <string name="generate">Generate</string>
+    <string name="ok_continue">OK, Continue</string>
+    <string name="notok_reprint">Not OK, Reprint</string>
+    <string name="goback">Go back</string>
+    <string name="cancel_reprint">Cancel Reprint</string>
+    <string name="cancel_markdown">Cancel Markdown</string>
+    <!--Login strings-->
+    <string name="welcomesam">Welcome to SAM</string>
+    <string name="useridentrymessage">Please enter user ID:</string>
+    <string name="passcodeentrymessage">Please enter your passcode</string>
+    <string name="newpasscodeentrymessage">Please enter your new passcode</string>
+    <string name="confirmnewpasscodeentrymessage">Please confirm your new passcode</string>
+    <string name="target">Target</string>
+    <string name="samdesc">STORE ASSISTANT MOBILE (SAM)</string>
+    <string name="sam">(SAM)</string>
+    <string name="pincontentdesc">PIN input field</string>
+    <string name="passcode_policy">Passcode cannot start with zero\nFor reset, it cannot be same as two previous passcodes</string>
+    <string name="new_passcode_confirmation_failed">Passcode confirmation failed. Please try again.</string>
+    <string name="login_disclaimer">Unauthorised access to Target Australia corporate system is strightly prohibited and will be prosecuted.</string>
+
+    <string name="device_configuration">App Setting</string>
+    <string name="helpdesk">Helpdesk</string>
+    <string name="help">Help</string>
+    <string name="parcel_management">Parcel\nManagement</string>
+    <string name="managers_markdown_home">Manager\'s\nMarkdown</string>
+    <!--Config page strings-->
+    <string name="new_connection">New Connection</string>
+    <string name="current_connection">Current Connection</string>
+    <!--Home page strings-->
+    <string name="productsearch">Product Search</string>
+    <string name="printlabels">Print Labels</string>
+    <string name="print">Print</string>
+    <string name="stockonhand">Stock On Hand</string>
+    <string name="laybyputaway">Layby Putaway</string>
+    <string name="interstoretransfer">Interstore Transfer</string>
+    <string name="inventoryadjustment">Inventory Adjustment</string>
+    <string name="returntovendor">Return to Vendor</string>
+    <string name="receiving">Receiving</string>
+    <string name="locationadit">Location Audit</string>
+    <string name="order_management">Order Management</string>
+    <string name="home">Home</string>
+    <string name="notifications">Notifications</string>
+    <string name="ticketing">Ticketing</string>
+    <string name="stock_management">Stock Management</string>
+    <string name="lay_by">Layby</string>
+    <string name="location_audit">Location Audit</string>
+    <string name="stock_take">Stocktake</string>
+    <string name="managers_markdown">Manager\'s Markdown</string>
+    <string name="click_and_collect">Click &amp; Collect</string>
+    <!--Product Search page strings-->
+    <string name="action_search">Search</string>
+    <string name="apnsearchdescription">Please tap the button below to search by APN:</string>
+    <string name="apnsearch">APN SEARCH:\t</string>
+    <string name="noproductfound">No product found. Please check your entry.</string>
+    <string name="nomanagerinfofound">No additional info to display</string>
+    <string name="noprinterfound">No printer found for the selected label.</string>
+    <string name="nosohavailable">No SOH available.</string>
+    <string name="nofilterfound">No Filter found.</string>
+    <string name="typeinsearchkeywords">Type in keywords, item code or just scan a barcode on the product.</string>
+    <string name="typeinsearchitemcode">To start, simply scan the barcode on the product or type in an item code.</string>
+    <string name="loadmore">Scroll to load more</string>
+    <string name="product_retail_price_text">RR $ </string>
+    <string name="product_current_price_text">CP $ </string>
+    <!--Menu Items-->
+    <string name="menu_filter">Filter</string>
+    <string name="menu_sort">Sort</string>
+    <string name="menu_sort_option_price_h2l">Price (High to Low)</string>
+    <string name="menu_sort_option_price_l2h">Price (Low to High)</string>
+    <string name="menu_sort_option_title_a2z">Title A to Z</string>
+    <string name="menu_sort_option_title_z2a">Title Z to A</string>
+    <string name="menu_soh">Stock On Hand</string>
+    <string name="menu_print_shelf_price_label">Print Shelf Price Label</string>
+    <string name="menu_manager_info">Additional Information</string>
+    <string name="mark_down_label">Markdown label</string>
+    <!--Store Finder Strings-->
+    <string name="product_size">Size:\t</string>
+    <string name="nearest_store">\tNearest Stores</string>
+    <string name="send_direction">Send Directions</string>
+    <string name="store_hours">Store Hours</string>
+    <string name="service_not_available">Service currently not available.\nPlease try again later.</string>
+    <!--Product Details page strings-->
+    <string name="select_size_and_color">Select a colour and size to check stock availability</string>
+    <string name="sizing">Sizing</string>
+    <string name="stockinformation">Stock Information</string>
+    <string name="additionalinformation">Additional Information</string>
+    <string name="stockintransit">Stock In Transit</string>
+    <string name="findanotherstore">Find another store</string>
+    <string name="descriptions">Descriptions</string>
+    <string name="features">Features </string>
+    <string name="otherinformation">More Information</string>
+    <string name="careinstructions">Care Instructions</string>
+    <string name="brand">Brand</string>
+    <string name="margin">Margin %</string>
+    <string name="rloApproved">RLO Approved Product</string>
+    <string name="rainCheckOrder">Raincheck Order</string>
+    <string name="buyNowPayLater">Buy Now Pay Later</string>
+    <string name="onlineExclusiveProduct">Online Exclusive Product</string>
+    <string name="composition">Composition</string>
+    <!--Manager Info Strings-->
+    <string name="manager_info_date_of_last_delivery">Date of last delivery</string>
+    <string name="manager_info_product_assortment_plan">Product Assortment Plan</string>
+    <string name="manager_info_origin_of_product">Product Origin</string>
+    <string name="manager_info_product_end_of_life">Product End of Life</string>
+    <string name="manager_info_supplier">Supplier</string>
+    <string name="manager_info">Manager’s Information</string>
+    <!--General Ticketing Strings-->
+    <string name="general_ticketing_header">General Ticketing</string>
+    <string name="general_ticketing_description">Print shelf price labels,\npromotional and sales flags, A4\nand A5</string>
+    <string name="pending_price_header">Pending Price</string>
+    <string name="permanent_price_header">Permanent Price</string>
+    <string name="pending_price_description">Print SPL for an itemcode that will\nchange price in the future</string>
+    <string name="permanent_price_description">Check if the price of an itemcode has changed since certain day in\nthe past.</string>
+    <string name="label_auditing_header">Label Auditing (Spot Check Audit)</string>
+    <string name="price_event_header">Price Event Management</string>
+    <string name="label_auditing_description">Scan and check if the information\non the label is correct</string>
+    <string name="price_event_description">Print labels by department for a specific price event</string>
+    <string name="product_listing_header">Pick List / Product List</string>
+    <string name="product_listing_description">Print A4 size pick list or product list for operation</string>
+    <string name="portable_printing_header">Portable Printing</string>
+    <string name="portable_printing_description">Use portable printer for SPL or\nmarked and damaged label</string>
+    <string name="general_ticketing_menu_all_batches">BATCH</string>
+    <string name="no_ticket">No Ticket available</string>
+    <string name="repeat">REPEAT</string>
+    <string name="scan_count">scans.</string>
+    <string name="general_ticketing_scan">scan(s). </string>
+    <string name="total_quantity_inventory_adjustment">Total quantity: </string>
+    <string name="general_ticketing_labels">label type(s).</string>
+    <string name="portable_printing_printed">printed.</string>
+    <string name="options">OPTIONS</string>
+    <string name="print_list_name">Print List Name</string>
+    <string name="item_scanned">Items scanned:</string>
+    <string name="no_of_itemcodes">No. of itemcodes:</string>
+    <string name="no_of_lables">No. of labels:</string>
+    <string name="footnote">FOOTNOTE</string>
+    <string name="no_label">No Label Found</string>
+    <!--Print Batch Strings-->
+    <string name="view_batch">VIEW\nBATCH</string>
+    <string name="edit_batch">EDIT\nBATCH</string>
+    <string name="settings">Settings</string>
+    <string name="done">DONE</string>
+    <!--Product Details Image Strings -->
+    <string name="product_image">Product Image</string>
+    <!--Label Auditing Strings-->
+    <string name="view_print_list">VIEW PRINT\nLIST</string>
+    <string name="label_ok">LABEL IS\nOK</string>
+    <string name="label_not_ok">LABEL IS\nNOT OK</string>
+    <string name="sign_dollar">$</string>
+    <string name="save">Save</string>
+    <string name="was">Was</string>
+    <string name="reprint_reason">Reprint Reason</string>
+    <string name="reprint_description">Please select one of the following reprint reasons:</string>
+    <string name="label_reprint_reason_price_higher">Label price higher than system price</string>
+    <string name="label_reprint_reason_missing">Missing label</string>
+    <string name="label_reprint_reason_soiled_damaged">Soiled / Damaged label</string>
+    <string name="add_to_list">Add to list</string>
+    <string name="label_is_ok">Label is OK</string>
+    <!--Pick and Product list strings-->
+    <string name="pick_quantity">Pick Qty</string>
+    <string name="quantity">Qty</string>
+    <string name="comment_hint">Comment</string>
+    <string name="list_type">List Type:</string>
+    <string name="total_quantity">Total qty</string>
+    <string name="product_count">Products.</string>
+    <string name="generate_print_batch">Generate Print Batch</string>
+    <!--Portable Printing-->
+    <string name="print_now">Print Now</string>
+    <string name="reduced">REDUCED</string>
+    <string name="damagedpackage">Damaged Package/Product</string>
+    <string name="nofurtherdisc">No Further Disc. No Layby/Rainchecks.</string>
+    <string name="uselastsettings">Use last settings</string>
+    <string name="markdown_label">Markdown Label</string>
+    <string name="regular_label">Regular / Promotional SPL</string>
+    <string name="reprint_labels">Reprint Labels</string>
+    <!--Price Event Management-->
+    <string name="past_events">Past Events</string>
+    <string name="prior_retail_price">Retail Price</string>
+    <string name="event_retail_price">Event Retail Price</string>
+    <string name="soh">SOH</string>
+    <string name="sit">SIT</string>
+    <string name="default_label_type">Default Label Type :</string>
+    <string name="price_event_date">Price Event Date:</string>
+    <string name="pos_no">POS No:</string>
+    <string name="price_event_end_date">Price Event End Date:</string>
+    <string name="today">TODAY</string>
+    <string name="price_event_no">Price Event No.</string>
+    <string name="created_by">Created By</string>
+    <string name="expired">Expired</string>
+    <string name="itemcodes">Itemcode(s)</string>
+    <string name="totalsoh">Total SOH</string>
+    <string name="items_selected">itemcode(s) selected.</string>
+    <!--Pending Price-->
+    <string name="pretend_scanning">Pretend scanning, tap here.</string>
+    <string name="pretend_multiple_timed">Pretend multiple timed prices, tap here.</string>
+    <string name="welcome">Welcome,</string>
+    <string name="colour_and_sizes">Color &amp; Sizes</string>
+    <string name="start_adding_products">START ADDING PRODUCTS</string>
+    <string name="multiple_timed_prices">Multiple Timed Prices</string>
+    <string name="multiple_timed_descriptions">Please select one of the following timed prices:</string>
+    <string name="all_day">All Day</string>
+    <string name="all_timed_prices">All Timed Prices</string>
+    <string name="timed_prices">Timed Prices</string>
+    <string name="all_timed_deals">All Timed Deals</string>
+    <string name="both">Both</string>
+    <string name="print_label">Print:</string>
+    <!--Markdown Labels-->
+    <string name="label_printed">label printed.</string>
+    <string name="markdown_labels_printing_records">All markdown labels printing records are kept for auditing purposes.</string>
+    <string name="tap_to_preview">Tap to preview</string>
+    <string name="write_off">Write Off</string>
+    <string name="continue_markdown">Continue Mark Down</string>
+    <string name="back_ticketing">Back to Ticketing Menu</string>
+    <string name="cancel_reprint_accept_ok">Cancel Reprint and\naccept OK labels</string>
+    <string name="cancel_reprint_discard_labels">Cancel Reprint and\nDiscard Printed labels</string>
+    <!--Stock management strings-->
+    <string name="stock_receipting">Stock Receipting</string>
+    <string name="stock_returns">Stock Returns</string>
+    <string name="inventory_adjustment">Inventory Adjustment</string>
+    <string name="interstore_transfer">Interstore Transfer</string>
+    <string name="stock_receipting_status_with_asn">With ASN</string>
+    <string name="stock_receipting_status_without_asn">Without ASN</string>
+    <string name="stock_receipting_status_search_asn">Search ASN</string>
+    <string name="stock_returns_status_to_dc">TO DC</string>
+    <string name="stock_returns_status_to_rlo">TO RLO</string>
+    <string name="stock_returns_status_to_supplier">TO SUPPLIER</string>
+    <string name="inventory_adjustment_status_adjust_manually">ADJUST MANUALLY</string>
+    <string name="interstore_transfer_status_sending">SENDING</string>
+    <string name="interstore_transfer_status_receiving">RECEIVING</string>
+    <string name="truck_seal">Truck Seal</string>
+    <string name="is_truck_seal_intact">Is the truck seal intact?</string>
+    <string name="damaged">Damaged</string>
+    <string name="intact">Intact</string>
+    <string name="comment_optional">Comments (option)</string>
+    <string name="scan_type_bol">Scan or type BOL to start</string>
+    <string name="stock_management_search_message">To start, please scan or key in the barcode on the Bill of Lading.\n\nYou can also tap on advanced search to find your ASNs.</string>
+    <string name="dc_delivery">DC Delivery</string>
+    <string name="bol">BoL</string>
+    <string name="asnref">ASN Ref</string>
+    <string name="asnsscc">ASN SSCC</string>
+    <string name="chep">Chep</string>
+    <string name="loscam">Loscam</string>
+    <string name="oversized">Oversized</string>
+    <string name="slipsheet">Slipsheet</string>
+    <string name="others">Others</string>
+    <string name="total_no_of_pallet">Total No. of Pallet:</string>
+    <string name="start_pallet_scan">To start, simply scan the\nbarcode on every pallet.</string>
+    <string name="pallets">Pallet(s)</string>
+    <string name="carton_bags">Carton/Bag(s)</string>
+    <string name="products">Products</string>
+    <string name="unreceipted_quantity">Unreceipted Qty</string>
+    <string name="stock_reason">Select Reason</string>
+    <string name="adjusted_quantity">Adj Qty</string>
+    <string name="stock_count_adjustment">Stock Count Adjustment</string>
+    <string name="update_actual_soh_quantity">Update Actual SOH Quantity</string>
+    <string name="adjust_inventory">Adjust Inventory</string>
+    <string name="actual_soh_qty">Actual SOH Qty</string>
+    <string name="you_can_scan_more_items">You can scan more items</string>
+    <!--Manager's Markdown-->
+    <string name="enter_markdown_price">Enter Markdown Price</string>
+    <string name="confirm_markdown">Confirm Markdown</string>
+    <string name="markdown_price">Markdown Price</string>
+    <string name="new_markdown">New Markdown</string>
+    <string name="markdown_posted_print">Yes, print label</string>
+    <string name="no_done">No, I’m done</string>
+    <string name="summary_itemcodes">Itemcode(s)</string>
+    <string name="generate_batch">Generate Batch</string>
+    <string name="preview">Preview</string>
+    <string name="retake">Retake</string>
+    <string name="confirm">Confirm</string>
+
+    <!--Stock Adjustment-->
+    <string name="reasons">Reasons</string>
+    <string name="adjustment_qty">Adj Qty</string>
+    <string name="update_current_itemcode_SOH">Update current itemcode SOH</string>
+    <string name="discard_and_start_new_itemcode">Discard and start a new itemcode</string>
+    <string name="reason_selection">Please select one of the following:</string>
+
+    <!-- Pallet Scan-->
+    <string name="please_scan_pallet_sscc">Please scan pallet SSCC.</string>
+    <string name="comment_option">Comments (option)</string>
+    <string name="receiveasn">Receive ASN</string>
+
+    <!--Voice To Text-->
+    <string name="messageSpeakNow">messageSpeakNow</string>
+
+    <!-- Lay By -->
+    <string name="parcels">Parcels</string>
+    <string name="located">Located</string>
+    <string name="layby_scan">To start, simply scan the barcode on the layby docket.</string>
+    <string name="status">Status:</string>
+    <string name="due">Due:</string>
+    <string name="nolaybydocketfound">No Layby Docket found. Please check your entry.</string>
+    <string name="parcel_putaway_removal">Parcel Putaway/Relocate</string>
+    <string name="parcel_putaway_removal_description">After receiving, use this function to putaway the parcels\nand assign a location.</string>
+    <string name="layby_putaway_removal_description">Use this function to putaway layby parcels and assign a\nlocation.</string>
+
+    <string name="location_audit_description">Check if system records for parcels location match with the\nphysical location.</string>
+    <string name="add_mode">Add Mode</string>
+    <string name="remove_mode">Remove Mode</string>
+    <string name="parcel_management_nav">Parcel Management</string>
+    <string name="it_help_desk">IT Helpdesk</string>
+
+
+    <!-- Location Audit-->
+    <string name="location">Location</string>
+    <string name="parcels_expected">Parcels Expected</string>
+    <string name="correct_scans">Correct Scans</string>
+    <string name="total_scans">Total Scans</string>
+    <string name="scan_barcode_layby">Please scan the barcode\non the layby docket.</string>
+    <string name="upload_audit_result">Upload Audit Result</string>
+    <string name="upload_and_exit">Upload &amp; Exit</string>
+    <string name="exit_without_upload">Exit without Upload</string>
+    <string name="uploading_audit_result">Uploading location audit result\nin the background…</string>
+    <string name="start_scan_location_barcode">To start, simply scan a location\nbarcode</string>
+    <string name="layby_parcel_ticket">Layby Parcel Ticket -</string>
+    <string name="parcel_label">Parcel Label</string>
+    <string name="scan_barcode_on_parcel_hint">Please scan the barcode\non a parcel.</string>
+    <string name="upload_previous_result_and_continue">Upload previous result and\ncontinue</string>
+
+    <!--Parcel Management-->
+    <string name="receiving_parcels">Receiving Parcels</string>
+    <string name="receiving_parcels_description">Use this function for receiving parcels arriving from\ncarrier.</string>
+    <string name="check_parcel">Check Parcel</string>
+    <string name="check_parcel_description">Check all locations of a parcel and if a parcel contains\nexceptions (e.g. banned items) that need attention.</string>
+    <string name="relocate_parcel">Relocate Parcel</string>
+    <string name="relocate_parcel_description">Remove parcels from a location and reassign them to a\nnew one.</string>
+    <string name="complete_order">Complete Order</string>
+    <string name="complete_order_description">Use this function to record customer collection of the\nparcel.</string>
+    <string name="return_to_floor">Return To Floor (RTF)</string>
+    <string name="return_to_floor_description">A RTF status click &amp; collect order means we need to\nunpack it and put it back to the shop floor.</string>
+    <string name="audit">Audit</string>
+    <string name="click_and_collect_search_hint">To complete a click &amp; collect order,\nplease scan the barcode or key in the\norder number.</string>
+    <string name="order_complete">Order Complete</string>
+    <string name="your_signature">Your Signature</string>
+    <string name="customer_signature">Customer\'s Signature</string>
+    <string name="customer_info">Customer Info</string>
+    <string name="yes_return_to_floor">Yes, Return To Floor</string>
+    <string name="collect_onbehalf_description">Please file the Click + Collect pick-up authorisation form.</string>
+    <string name="collect_onbehalf">Collecting On Behalf</string>
+    <string name="photo_id_check">Photo ID Check</string>
+
+    <!--Inter Store Transfer-->
+    <string name="start_scanning_items">Start Scanning Items</string>
+    <string name="reason_for_transfer">Reason for transfer</string>
+    <string name="carrier_information">Carrier Information</string>
+    <string name="please_change_text_color">Please change text color</string>
+    <string name="reason">Reason:</string>
+    <string name="comment">Comment:</string>
+    <string name="units">Unit(s)</string>
+
+    <string name="create_ist">Create IST</string>
+    <string name="transfer_qty">Transfer Qty</string>
+    <string name="transfer_no">Transfer No.:</string>
+</resources>

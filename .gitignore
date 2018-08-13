@@ -9,3 +9,6 @@
 /SecureWallet/SecureWallet/bin/Debug
 /SecureWallet/SecureWallet/obj/.cache
 /SecureWallet/.vs/SecureWallet/v14
+/.vs
+/packages
+/SecureWallet/.vs/SecureWallet/v15
