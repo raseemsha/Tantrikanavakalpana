@@ -150,6 +150,7 @@ namespace SecureWallet
                 }
                 else
                 {
+                    
                     viewExpLst.Visibility = ViewStates.Gone;
                     txtStoreInfoHeader.Visibility = ViewStates.Gone;
                 }
@@ -165,7 +166,7 @@ namespace SecureWallet
         private void BindData()
         {
 
-            SetHeader();
+            SetContentOfHeader();
             storedInfoAdapter = new StoredInfoAdapter(Activity, lstStoredData,this);
             explstTrainingTopics.SetAdapter(storedInfoAdapter);
            
@@ -175,11 +176,26 @@ namespace SecureWallet
 
         }
 
-        public void SetHeader()
+        private void SetContentOfHeader()
         {
             viewExpLst.Visibility = ViewStates.Visible;
             txtStoreInfoHeader.Visibility = ViewStates.Visible;
             txtStoreInfoHeader.Text = string.Format(Constants.StoreDetailsHeader, lstStoredData.Count);
+        }
+
+        public void SetHeader()
+        {
+            if (lstStoredData != null && lstStoredData.Count > 0)
+            {
+                SetContentOfHeader();
+
+            }
+
+            else
+            {
+                viewExpLst.Visibility = ViewStates.Gone;
+                txtStoreInfoHeader.Visibility = ViewStates.Gone;
+            }
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
