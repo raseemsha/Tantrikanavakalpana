@@ -40,10 +40,12 @@ namespace SecureWallet
         FingerprintManager fingerprintManager;
         private TextView txtStoreInfoHeader;
         private View viewExpLst;
+
+        public static DateTime timeOnUnsucessfulAttempts;
         public StoredDetails()
         {
             lstStoredData = new List<AddInfoModel>();
-           
+            timeOnUnsucessfulAttempts = DateTime.MinValue;
         }
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -150,7 +152,11 @@ namespace SecureWallet
                 }
                 else
                 {
-                    
+                    isPlus = false;
+                    fabMain.SetImageResource(Resource.Drawable.ic_cross);
+                    llfabUpdateData.Visibility = ViewStates.Visible;
+                    llfabAddData.Visibility = ViewStates.Visible;
+
                     viewExpLst.Visibility = ViewStates.Gone;
                     txtStoreInfoHeader.Visibility = ViewStates.Gone;
                 }
@@ -193,6 +199,10 @@ namespace SecureWallet
 
             else
             {
+                isPlus = false;
+                fabMain.SetImageResource(Resource.Drawable.ic_cross);
+                llfabUpdateData.Visibility = ViewStates.Visible;
+                llfabAddData.Visibility = ViewStates.Visible;
                 viewExpLst.Visibility = ViewStates.Gone;
                 txtStoreInfoHeader.Visibility = ViewStates.Gone;
             }
@@ -286,6 +296,22 @@ namespace SecureWallet
 
             {
                 CloseAllList();
+                if(timeOnUnsucessfulAttempts!=DateTime.MinValue)
+                {
+                    double difference = (DateTime.Now - timeOnUnsucessfulAttempts).TotalSeconds;
+                    if(difference<50)
+                    {
+                        var differenceToDisplay = Convert.ToInt32((50 - difference) / 10);
+                        AlertBox.CreateOkAlertBox("Authentication", string.Format(Constants.AutenticationFailedMessage, differenceToDisplay != 0? differenceToDisplay : 1), Activity, null);
+                        return true;
+                    }
+                    else
+                    {
+                        timeOnUnsucessfulAttempts = DateTime.MinValue;
+                    }
+                    
+                }
+                
 
                 if (cryptoObject != null)
                 {
