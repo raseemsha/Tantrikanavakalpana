@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Timers;
 using Android;
 using Android.Content;
@@ -34,17 +35,15 @@ namespace SecureWallet
         public override void OnAuthenticationFailed()
         {
             counter++;
-            if(counter > 3)
-            {
-                return;
-            }
+           
             StopTimer();
             
 
             
-            if (counter==3)
+            if (counter==5)
             {
-                SensorMsgChange(Constants.AutenticationFailedMessage);
+                StoredDetails.timeOnUnsucessfulAttempts = DateTime.Now;
+                SensorMsgChange(string.Format(Constants.AutenticationFailedMessage,5));
 
                 StartTimer(Constants.TouchSensor,true);
             }
@@ -57,10 +56,7 @@ namespace SecureWallet
         }
         public override void OnAuthenticationSucceeded(FingerprintManager.AuthenticationResult result)
         {
-            if(counter>3)
-            {
-                return;
-            }
+           
             StopTimer();
             autDialog.Dismiss();
             autDialog.AutenticationSucess();

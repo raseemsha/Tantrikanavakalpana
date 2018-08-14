@@ -40,10 +40,12 @@ namespace SecureWallet
         FingerprintManager fingerprintManager;
         private TextView txtStoreInfoHeader;
         private View viewExpLst;
+
+        public static DateTime timeOnUnsucessfulAttempts;
         public StoredDetails()
         {
             lstStoredData = new List<AddInfoModel>();
-           
+            timeOnUnsucessfulAttempts = DateTime.MinValue;
         }
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -150,6 +152,11 @@ namespace SecureWallet
                 }
                 else
                 {
+                    isPlus = false;
+                    fabMain.SetImageResource(Resource.Drawable.ic_cross);
+                    llfabUpdateData.Visibility = ViewStates.Visible;
+                    llfabAddData.Visibility = ViewStates.Visible;
+
                     viewExpLst.Visibility = ViewStates.Gone;
                     txtStoreInfoHeader.Visibility = ViewStates.Gone;
                 }
@@ -165,7 +172,7 @@ namespace SecureWallet
         private void BindData()
         {
 
-            SetHeader();
+            SetContentOfHeader();
             storedInfoAdapter = new StoredInfoAdapter(Activity, lstStoredData,this);
             explstTrainingTopics.SetAdapter(storedInfoAdapter);
            
@@ -175,11 +182,30 @@ namespace SecureWallet
 
         }
 
-        public void SetHeader()
+        private void SetContentOfHeader()
         {
             viewExpLst.Visibility = ViewStates.Visible;
             txtStoreInfoHeader.Visibility = ViewStates.Visible;
             txtStoreInfoHeader.Text = string.Format(Constants.StoreDetailsHeader, lstStoredData.Count);
+        }
+
+        public void SetHeader()
+        {
+            if (lstStoredData != null && lstStoredData.Count > 0)
+            {
+                SetContentOfHeader();
+
+            }
+
+            else
+            {
+                isPlus = false;
+                fabMain.SetImageResource(Resource.Drawable.ic_cross);
+                llfabUpdateData.Visibility = ViewStates.Visible;
+                llfabAddData.Visibility = ViewStates.Visible;
+                viewExpLst.Visibility = ViewStates.Gone;
+                txtStoreInfoHeader.Visibility = ViewStates.Gone;
+            }
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -270,6 +296,22 @@ namespace SecureWallet
 
             {
                 CloseAllList();
+                if(timeOnUnsucessfulAttempts!=DateTime.MinValue)
+                {
+                    double difference = (DateTime.Now - timeOnUnsucessfulAttempts).TotalSeconds;
+                    if(difference<50)
+                    {
+                        var differenceToDisplay = Convert.ToInt32((50 - difference) / 10);
+                        AlertBox.CreateOkAlertBox("Authentication", string.Format(Constants.AutenticationFailedMessage, differenceToDisplay != 0? differenceToDisplay : 1), Activity, null);
+                        return true;
+                    }
+                    else
+                    {
+                        timeOnUnsucessfulAttempts = DateTime.MinValue;
+                    }
+                    
+                }
+                
 
                 if (cryptoObject != null)
                 {

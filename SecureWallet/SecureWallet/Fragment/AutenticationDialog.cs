@@ -18,6 +18,7 @@ namespace SecureWallet
     {
         private View view;
         internal TextView txtAutenticationMsg;
+        private TextView txtCancel;
         FingerPrintHandler handler;
         public event EventHandler<DialogEventArgs> EventTrigger;
 
@@ -31,6 +32,7 @@ namespace SecureWallet
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            Cancelable = false;
 
             // Create your fragment here
         }
@@ -46,6 +48,13 @@ namespace SecureWallet
         private void InitiateControls()
         {
             txtAutenticationMsg = view.FindViewById<TextView>(Resource.Id.txtAutenticationMsg);
+            txtCancel = view.FindViewById<TextView>(Resource.Id.txtCancel);
+            txtCancel.Click += TxtCancel_Click;
+        }
+
+        private void TxtCancel_Click(object sender, EventArgs e)
+        {
+            Dismiss();
         }
 
         /// <summary>
