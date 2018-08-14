@@ -150,6 +150,7 @@ namespace SecureWallet
                 lstStoredData = FileOperations.ReadFromDevice<AddInfoModel>();
                 if (lstStoredData != null && lstStoredData.Count > 0)
                 {
+                    lstStoredData = lstStoredData.OrderByDescending(x => x.HitCount).ToList();
                     BindData();
                 }
                 else
@@ -239,7 +240,7 @@ namespace SecureWallet
             llfabAddData = view.FindViewById<LinearLayout>(Resource.Id.llfabAddData);
             explstTrainingTopics= view.FindViewById<ExpandableListView>(Resource.Id.expLstItems);
             viewExpLst = view.FindViewById<View>(Resource.Id.viewExpLst);
-             llTransparent = view.FindViewById<LinearLayout>(Resource.Id.llTransparent);
+            llTransparent = view.FindViewById<LinearLayout>(Resource.Id.llTransparent);
             fabMain.Click += FabMain_Click;
             llfabUpdateData.Click += LlfabUpdateData_Click;
             llfabAddData.Click += LlfabAddData_Click;
@@ -278,6 +279,7 @@ namespace SecureWallet
         {
             if(isPlus)
             {
+                CloseAllList();
                 isPlus = false;
                 fabMain.SetImageResource(Resource.Drawable.ic_cross);
                 llfabUpdateData.Visibility = ViewStates.Gone;
@@ -332,7 +334,11 @@ namespace SecureWallet
 
                         autDialog.EventTrigger += delegate
                         {
+                            lstStoredData[groupPosition].HitCount = lstStoredData[groupPosition].HitCount+1;
+                            var updateQuery = string.Format("update AddInfoModel set HitCount ={0} where Title ='{1}'", lstStoredData[groupPosition].HitCount, lstStoredData[groupPosition].Title);
+                            FileOperations.UpdateToDevice(updateQuery);
                             parent.ExpandGroup(groupPosition);
+
                         };
                         autDialog.Show(fragmentTransaction, "AuthenticateDialog");
 
@@ -356,12 +362,22 @@ namespace SecureWallet
 
         public override void OnStop()
         {
+            
             base.OnStop();
-            autDialog?.Dismiss();
-            CloseAllList();
+          
+           
             
         }
 
-       
+        public override void OnPause()
+        {
+            base.OnPause();
+            autDialog?.Dismiss();
+            CloseAllList();
+        }
+
+
+
+
     }
 }

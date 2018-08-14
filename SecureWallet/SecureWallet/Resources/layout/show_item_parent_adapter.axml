@@ -3,66 +3,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="70dp">
-  <View
-      android:layout_width="fill_parent"
-      android:layout_height="2dp"
-      android:background="@drawable/card_view_bottom" />
+    
+    android:layout_height="60dp">
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/card_view_bottom" />
 
 
-  <RelativeLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="10dp"
-      android:layout_marginTop="10dp"
-      android:layout_marginRight="10dp"
-      android:layout_marginBottom="5dp">
-    <ImageView
-        android:id="@+id/imgLockUnLock"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:scaleType="fitXY"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-
-
-        android:src="@drawable/ic_lock" />
-    <TextView
-        android:id="@+id/txtHeaderTitle"
-        android:padding="3dp"
-
-        android:textColor="@color/black"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        android:gravity="left|top"
-        android:text="text"
-        android:textSize="18sp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp">
+        <ImageView
+            android:id="@+id/imgLockUnLock"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:scaleType="fitXY"
 
-        android:inputType="textCapSentences"
-        android:layout_alignParentLeft="true"
-        android:textStyle="bold" />
+            android:layout_alignParentLeft="true"
 
-    <ImageView
-        android:id="@+id/imgExpandCollapseIndicator"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+            android:gravity="center"
+
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_lock" />
+      <ImageView
+           android:id="@+id/imgExpandCollapseIndicator"
+           android:layout_width="20dp"
+           android:layout_height="20dp"
 
 
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_down_arrow" />
-  </RelativeLayout>
+           android:layout_centerVertical="true"
+           android:layout_alignParentRight="true"
+            
+           android:layout_marginRight="10dp"
+           android:layout_marginTop="20dp"
+           android:scaleType="fitXY"
+           android:src="@drawable/ic_down_arrow" />
+        <TextView
+            android:id="@+id/txtHeaderTitle"
+            android:paddingLeft="5dp"
+            android:paddingRight="3dp"
+
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+
+            android:layout_toRightOf="@id/imgLockUnLock"
+            android:layout_toLeftOf="@id/imgExpandCollapseIndicator"
+            android:gravity="left|top"
+            android:text="text"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:inputType="textCapSentences"
+
+            android:textStyle="bold" />
+
+       
+    </RelativeLayout>
 
 </LinearLayout>

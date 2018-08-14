@@ -66,14 +66,8 @@
     <Reference Include="SQLitePCLRaw.lib.e_sqlite3, Version=1.1.11.121, Culture=neutral, PublicKeyToken=e4ad490600e2234c, processorArchitecture=MSIL">
       <HintPath>..\packages\SQLitePCLRaw.lib.e_sqlite3.android.1.1.11\lib\MonoAndroid\SQLitePCLRaw.lib.e_sqlite3.dll</HintPath>
     </Reference>
-    <Reference Include="SQLitePCLRaw.lib.sqlcipher, Version=1.1.11.121, Culture=neutral, PublicKeyToken=980f7eff3ce1003e, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.lib.sqlcipher.android.1.1.11\lib\MonoAndroid\SQLitePCLRaw.lib.sqlcipher.dll</HintPath>
-    </Reference>
     <Reference Include="SQLitePCLRaw.provider.e_sqlite3, Version=1.1.11.121, Culture=neutral, PublicKeyToken=9c301db686d0bd12, processorArchitecture=MSIL">
       <HintPath>..\packages\SQLitePCLRaw.provider.e_sqlite3.android.1.1.11\lib\MonoAndroid\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.provider.sqlcipher, Version=1.1.11.121, Culture=neutral, PublicKeyToken=7bbc99275c710061, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.provider.sqlcipher.android.1.1.11\lib\MonoAndroid\SQLitePCLRaw.provider.sqlcipher.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
