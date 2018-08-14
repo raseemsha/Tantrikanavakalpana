@@ -10,6 +10,18 @@
     android:orientation="vertical"
     android:scrollbars="none">
 
+  <LinearLayout
+      android:id="@+id/llTransparent"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@color/transparent_black"
+    
+      android:visibility="gone"
+      android:clickable="true"
+      android:orientation="horizontal">
+
+  </LinearLayout>
+
   <TextView
       android:id="@+id/txtStoreInfoHeader"
       android:layout_width="match_parent"
@@ -38,7 +50,7 @@
       android:padding="5dp" />
   <View
       android:id="@+id/viewExpLst"
-      android:layout_width="match_parent"
+      android:layout_width="fill_parent"
       android:layout_height="2dp"
       android:background="@drawable/card_view_bottom"
       android:layout_marginBottom="35dp"
@@ -58,6 +70,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginRight="5dp"
         android:text="Add info"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -84,6 +97,7 @@
         android:text="Update info"
         android:layout_marginTop="12dp"
         android:layout_marginRight="5dp"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <android.support.design.widget.FloatingActionButton

@@ -40,6 +40,8 @@ namespace SecureWallet
         FingerprintManager fingerprintManager;
         private TextView txtStoreInfoHeader;
         private View viewExpLst;
+        AutenticationDialog autDialog;
+        private LinearLayout llTransparent;
 
         public static DateTime timeOnUnsucessfulAttempts;
         public StoredDetails()
@@ -154,9 +156,9 @@ namespace SecureWallet
                 {
                     isPlus = false;
                     fabMain.SetImageResource(Resource.Drawable.ic_cross);
-                    llfabUpdateData.Visibility = ViewStates.Visible;
+                    llfabUpdateData.Visibility = ViewStates.Gone;
                     llfabAddData.Visibility = ViewStates.Visible;
-
+                   llTransparent.Visibility = ViewStates.Visible;
                     viewExpLst.Visibility = ViewStates.Gone;
                     txtStoreInfoHeader.Visibility = ViewStates.Gone;
                 }
@@ -176,7 +178,7 @@ namespace SecureWallet
             storedInfoAdapter = new StoredInfoAdapter(Activity, lstStoredData,this);
             explstTrainingTopics.SetAdapter(storedInfoAdapter);
            
-            CloseAllList();
+           
 
 
 
@@ -200,8 +202,9 @@ namespace SecureWallet
             else
             {
                 isPlus = false;
+                llTransparent.Visibility = ViewStates.Visible;
                 fabMain.SetImageResource(Resource.Drawable.ic_cross);
-                llfabUpdateData.Visibility = ViewStates.Visible;
+                llfabUpdateData.Visibility = ViewStates.Gone;
                 llfabAddData.Visibility = ViewStates.Visible;
                 viewExpLst.Visibility = ViewStates.Gone;
                 txtStoreInfoHeader.Visibility = ViewStates.Gone;
@@ -236,11 +239,12 @@ namespace SecureWallet
             llfabAddData = view.FindViewById<LinearLayout>(Resource.Id.llfabAddData);
             explstTrainingTopics= view.FindViewById<ExpandableListView>(Resource.Id.expLstItems);
             viewExpLst = view.FindViewById<View>(Resource.Id.viewExpLst);
+             llTransparent = view.FindViewById<LinearLayout>(Resource.Id.llTransparent);
             fabMain.Click += FabMain_Click;
             llfabUpdateData.Click += LlfabUpdateData_Click;
             llfabAddData.Click += LlfabAddData_Click;
             explstTrainingTopics.SetOnGroupClickListener(this);
-            CloseAllList();
+           
 
 
         }
@@ -260,8 +264,8 @@ namespace SecureWallet
         private void LlfabAddData_Click(object sender, EventArgs e)
         {
             Android.Support.V4.App.FragmentTransaction transaction = Activity.SupportFragmentManager.BeginTransaction();
-            transaction.Replace(Resource.Id.container, new AddInfo(this), "AddInfo");
-            transaction.AddToBackStack("AddInfo");
+            transaction.Replace(Resource.Id.container, new AddInfo(this), Constants.AddInfo);
+            transaction.AddToBackStack(Constants.AddInfo);
             transaction.Commit();
         }
 
@@ -276,13 +280,14 @@ namespace SecureWallet
             {
                 isPlus = false;
                 fabMain.SetImageResource(Resource.Drawable.ic_cross);
-                llfabUpdateData.Visibility = ViewStates.Visible;
+                llfabUpdateData.Visibility = ViewStates.Gone;
                 llfabAddData.Visibility = ViewStates.Visible;
+               llTransparent.Visibility = ViewStates.Visible;
             }
             else
             {
                 isPlus = true;
-                
+                llTransparent.Visibility = ViewStates.Gone;
                 llfabUpdateData.Visibility = ViewStates.Gone;
                 llfabAddData.Visibility = ViewStates.Gone;
                 fabMain.SetImageResource(Resource.Drawable.ic_add);
@@ -292,55 +297,71 @@ namespace SecureWallet
 
         public bool OnGroupClick(ExpandableListView parent, View clickedView, int groupPosition, long id)
         {
-            if(!(parent.IsGroupExpanded(groupPosition)))
-
+            if(llTransparent.Visibility!=ViewStates.Visible)
             {
-                CloseAllList();
-                if(timeOnUnsucessfulAttempts!=DateTime.MinValue)
+                if (!(parent.IsGroupExpanded(groupPosition)))
+
                 {
-                    double difference = (DateTime.Now - timeOnUnsucessfulAttempts).TotalSeconds;
-                    if(difference<50)
+                    CloseAllList();
+                    if (timeOnUnsucessfulAttempts != DateTime.MinValue)
                     {
-                        var differenceToDisplay = Convert.ToInt32((50 - difference) / 10);
-                        AlertBox.CreateOkAlertBox("Authentication", string.Format(Constants.AutenticationFailedMessage, differenceToDisplay != 0? differenceToDisplay : 1), Activity, null);
-                        return true;
+                        double difference = (DateTime.Now - timeOnUnsucessfulAttempts).TotalSeconds;
+                        if (difference < 60)
+                        {
+                            var differenceToDisplay = Convert.ToInt32(60 - difference);
+                            AlertBox.CreateOkAlertBox("Authentication", string.Format(Constants.AutenticationFailedMessage, differenceToDisplay != 0 ? differenceToDisplay : 1), Activity, null);
+                            return true;
+                        }
+                        else
+                        {
+                            timeOnUnsucessfulAttempts = DateTime.MinValue;
+                        }
+
                     }
-                    else
+
+
+                    if (cryptoObject != null)
                     {
-                        timeOnUnsucessfulAttempts = DateTime.MinValue;
+                        Android.Support.V4.App.FragmentTransaction fragmentTransaction = FragmentManager.BeginTransaction();
+                        Android.Support.V4.App.Fragment previousFragment = FragmentManager.FindFragmentByTag("AuthenticateDialog");
+                        if (previousFragment != null)
+                        {
+                            fragmentTransaction.Remove(previousFragment);
+                        }
+                        autDialog = new AutenticationDialog(fingerprintManager, cryptoObject, Activity);
+
+                        autDialog.EventTrigger += delegate
+                        {
+                            parent.ExpandGroup(groupPosition);
+                        };
+                        autDialog.Show(fragmentTransaction, "AuthenticateDialog");
+
+
+
                     }
-                    
                 }
-                
 
-                if (cryptoObject != null)
+                else
                 {
-                    Android.Support.V4.App.FragmentTransaction fragmentTransaction = FragmentManager.BeginTransaction();
-                    Android.Support.V4.App.Fragment previousFragment = FragmentManager.FindFragmentByTag("AuthenticateDialog");
-                    if (previousFragment != null)
-                    {
-                        fragmentTransaction.Remove(previousFragment);
-                    }
-                    AutenticationDialog autDialog = new AutenticationDialog(fingerprintManager, cryptoObject, Activity);
-
-                    autDialog.EventTrigger += delegate
-                    {
-                        parent.ExpandGroup(groupPosition);
-                    };
-                    autDialog.Show(fragmentTransaction, "AuthenticateDialog");
-
-
-
+                    parent.CollapseGroup(groupPosition);
                 }
             }
-
-            else
-            {
-                parent.CollapseGroup(groupPosition);
-            }
+            
             
             
             return true;
         }
+
+      
+
+        public override void OnStop()
+        {
+            base.OnStop();
+            autDialog?.Dismiss();
+            CloseAllList();
+            
+        }
+
+       
     }
 }

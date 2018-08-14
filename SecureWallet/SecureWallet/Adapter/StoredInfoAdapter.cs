@@ -79,7 +79,7 @@ namespace SecureWallet
             };
             imgEdit.Click += delegate
             {
-
+                NavigateToEditFragment(listValues[groupPosition]);
             };
             txtUserId.Text = listValues[groupPosition].UserId;
             txtPassword.Text = listValues[groupPosition].Password;
@@ -98,11 +98,17 @@ namespace SecureWallet
             return convertView;
         }
 
-      
 
-     
+        private void NavigateToEditFragment(AddInfoModel addInfoModel)
+        {
+            Android.Support.V4.App.FragmentTransaction transaction = storedDetails.Activity.SupportFragmentManager.BeginTransaction();
+            transaction.Replace(Resource.Id.container, new AddInfo(storedDetails, addInfoModel), Constants.AddEditInfoFragment);
+            transaction.AddToBackStack(Constants.AddEditInfoFragment);
+            transaction.Commit();
+        }
 
-      
+
+
         public override Object GetGroup(int groupPosition)
         {
             return groupPosition;
@@ -133,7 +139,7 @@ namespace SecureWallet
                 imgView.SetImageResource(Resource.Drawable.ic_down_arrow);
             }
 
-            txtTopicTitle.Text = titleName;
+            txtTopicTitle.Text = titleName[0].ToString().ToUpper() + titleName.Substring(1);
             return convertView;
         }
 

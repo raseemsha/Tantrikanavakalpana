@@ -43,7 +43,7 @@ namespace SecureWallet
             if (counter==5)
             {
                 StoredDetails.timeOnUnsucessfulAttempts = DateTime.Now;
-                SensorMsgChange(string.Format(Constants.AutenticationFailedMessage,5));
+                SensorMsgChange(string.Format(Constants.AutenticationFailedMessage,60));
 
                 StartTimer(Constants.TouchSensor,true);
             }

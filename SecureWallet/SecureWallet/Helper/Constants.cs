@@ -19,11 +19,14 @@ namespace SecureWallet
         public const string AutenticationFailedMessage = "Too many attempts.Autentication failed.Try after {0} seconds";
         public const string Wallet = "Wallet";
         public const string AddInfo = "Add Information";
+        public const string EditInfo = "Edit Information";
         public const string AppExit = "Are you sure you want to exit the application ?";
-
+        public const string AddEditInfoFragment = "AddOrEditFragment";
 
         public const string StoreDetailsHeader = "Secured Informations :{0}";
         public const string StoredDetailsFragment = "StoredDetailsFragment";
         public const string AddInfoFragment = "AddInfoFragment";
+
+        public const string btnEditText = "EDIT INFO";
     }
 }

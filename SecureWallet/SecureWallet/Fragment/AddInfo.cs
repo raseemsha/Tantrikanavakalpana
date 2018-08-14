@@ -15,6 +15,7 @@ namespace SecureWallet
         private EditText edtPassword;
         private EditText edtAdditionalInfo;
         private StoredDetails storedDetails;
+        private AddInfoModel addInfoModel;
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -24,6 +25,12 @@ namespace SecureWallet
         public AddInfo(StoredDetails storedDetails)
         {
             this.storedDetails = storedDetails;
+        }
+
+        public AddInfo(StoredDetails storedDetails, AddInfoModel addInfoModel)
+        {
+            this.storedDetails = storedDetails;
+            this.addInfoModel = addInfoModel;
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -38,13 +45,27 @@ namespace SecureWallet
         private void InititateControls()
         {
             AppBarManager.ShowBackButtonInAppBar();
-            AppBarManager.SetTitle(Constants.AddInfo);
             edtTitle = view.FindViewById<EditText>(Resource.Id.edtTitle);
             edtUserId = view.FindViewById<EditText>(Resource.Id.edtUserId);
             edtPassword = view.FindViewById<EditText>(Resource.Id.edtPassword);
             edtAdditionalInfo = view.FindViewById<EditText>(Resource.Id.edtAdditionalInfo);
             btnAdditionalInfo = view.FindViewById<Button>(Resource.Id.btnAdditionalInfo);
             btnAdditionalInfo.Click += BtnAdditionalInfo_Click;
+            if (addInfoModel!=null)
+            {
+                edtTitle.Text = addInfoModel.Title;
+                edtUserId.Text = addInfoModel.UserId;
+                edtPassword.Text = addInfoModel.Password;
+                edtAdditionalInfo.Text = addInfoModel.AdditionalInformation;
+                AppBarManager.SetTitle(Constants.EditInfo);
+                btnAdditionalInfo.Text = Constants.EditInfo;
+            }
+            else
+            {
+                AppBarManager.SetTitle(Constants.AddInfo);
+            }
+            
+            
         }
 
         private void BtnAdditionalInfo_Click(object sender, EventArgs e)
@@ -57,19 +78,29 @@ namespace SecureWallet
                     return;
                 }
 
-                var listOfValues = FileOperations.ReadFromDevice<AddInfoModel>();
-                var titleExist = listOfValues?.Where(x => x.Title == edtTitle.Text).Any();
-
-                if (titleExist == true)
+                if(btnAdditionalInfo.Text==Constants.EditInfo)
                 {
-                    AlertBox.CreateOkAlertBox("Warning", "Entered title already exist.Please change the field value", Activity, null);
-                    return;
+                    FileOperations.DeleteSingleEntryFromTable("AddInfoModel", string.Format("Title ='{0}'", addInfoModel.Title));
+                    
+                }
+                else
+                {
+                    var listOfValues = FileOperations.ReadFromDevice<AddInfoModel>();
+                    var titleExist = listOfValues?.Where(x => x.Title == edtTitle.Text).Any();
+
+                    if (titleExist == true)
+                    {
+                        AlertBox.CreateOkAlertBox("Warning", "Entered title already exist.Please change the field value", Activity, null);
+                        return;
+                    }
+
+                    
                 }
 
                 var addInfo = new AddInfoModel { Title = edtTitle.Text, UserId = edtUserId.Text, Password = edtPassword.Text, AdditionalInformation = edtAdditionalInfo.Text };
 
                 FileOperations.InsertOrReplace(addInfo);
-                
+
                 Activity.SupportFragmentManager.PopBackStackImmediate();
             }
 
