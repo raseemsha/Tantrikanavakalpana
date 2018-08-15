@@ -13,3 +13,5 @@
 /packages
 /SecureWallet/.vs/SecureWallet/v15
 /SecureWallet/.vs/SecureWallet/DesignTimeBuild/.dtbcache
+/SecureWallet/SecureWallet/obj/Release
+/SecureWallet/SecureWallet/bin/Release

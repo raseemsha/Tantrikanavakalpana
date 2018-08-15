@@ -61,26 +61,30 @@ namespace SecureWallet
         {
             if (ContextCompat.CheckSelfPermission(Activity, Manifest.Permission.UseFingerprint)!= (int)Android.Content.PM.Permission.Granted)
             {
+                MainActivity.ActivityMain.FingerPrintNotEnabledMessage(Constants.FingerPrintPermissionNotEnabled);
                 return;
             }
 
             if (!fingerprintManager.IsHardwareDetected)
             {
-                AlertBox.CreateOkAlertBox("Error", "FingerPrint authentication permission not enable",Activity,null);
+                MainActivity.ActivityMain.FingerPrintNotEnabledMessage(Constants.FingerPrintHardWareNotDetected);
+                return;
             }
 
             else
             {
                 if (!fingerprintManager.HasEnrolledFingerprints)
                 {
-                    AlertBox.CreateOkAlertBox("Error", "Register at least one fingerprint in Settings", Activity, null);
+                    MainActivity.ActivityMain.FingerPrintNotEnabledMessage(Constants.SetFingerPrintMessage);
+                    return;
                 }
 
                 else
                 {
                     if(!keyguardManager.IsKeyguardSecure)
                     {
-                        AlertBox.CreateOkAlertBox("Error", "Lock screen security not enable in Settings", Activity, null);
+                        MainActivity.ActivityMain.FingerPrintNotEnabledMessage(Constants.KeyGuardSecurityError);
+                        return;
                     }
                     else
                     {

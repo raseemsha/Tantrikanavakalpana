@@ -6,6 +6,7 @@ using Android.Support.V7.App;
 using System;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 
+
 namespace SecureWallet
 {
     
@@ -14,10 +15,11 @@ namespace SecureWallet
     {
         private View view = null;
         private static SupportToolbar mToolbar;
+        public static MainActivity ActivityMain;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            ActivityMain = this;
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
             view = this.FindViewById(Resource.Id.container);
@@ -80,9 +82,18 @@ namespace SecureWallet
             AlertBox.CreateYesNoAlertBox("Warning", Constants.AppExit, this, Exit, null,Resource.String.yes, Resource.String.no);
         }
 
-        private void Exit()
+        public void Exit()
         {
-            Finish();
+            FinishAffinity();
+           
+
+
+
+        }
+
+        public void FingerPrintNotEnabledMessage(string message)
+        {
+            AlertBox.CreateOkAlertBox("Error", message, this, Exit);
         }
     }
 }

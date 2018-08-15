@@ -28,5 +28,11 @@ namespace SecureWallet
         public const string AddInfoFragment = "AddInfoFragment";
 
         public const string btnEditText = "EDIT INFO";
+
+        public const string FingerPrintHardWareNotDetected = "FingerPrint hardware not detected";
+        public const string FingerPrintPermissionNotEnabled = "FingerPrint authentication permission not enabled";
+        public const string SetFingerPrintMessage = "Register at least one fingerprint in mobile settings";
+        public const string KeyGuardSecurityError = "Lock screen security not enable in mobile settings";
+
     }
 }
