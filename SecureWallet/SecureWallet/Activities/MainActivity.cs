@@ -5,20 +5,26 @@ using Android.Views;
 using Android.Support.V7.App;
 using System;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
-
+using Android.Gms.Common.Apis;
+using Android.Gms.Auth.Api.SignIn;
+using Android.Gms.Auth.Api;
+using Java.Lang;
 
 namespace SecureWallet
 {
     
     [Activity(Label = "Secure Wallet", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, WindowSoftInputMode = Android.Views.SoftInput.AdjustPan | SoftInput.StateAlwaysHidden)]
-    public class MainActivity : AppCompatActivity
+    public class MainActivity : AppCompatActivity, GoogleApiClient.IConnectionCallbacks, IResultCallback
     {
         private View view = null;
         private static SupportToolbar mToolbar;
         public static MainActivity ActivityMain;
+        GoogleSignInOptions googleSignInOption;
+        GoogleApiClient googleApiClient;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            
             ActivityMain = this;
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
@@ -26,13 +32,24 @@ namespace SecureWallet
             mToolbar = FindViewById<SupportToolbar>(Resource.Id.toolbar);
             SetSupportActionBar(mToolbar);
             AppBarManager.InitAppBar(this, SupportActionBar);
-            
-            
+           
+           
+
             if (FileOperations.CreateTable<AddInfoModel>())
             {
                 ReplaceFragment();
             }
             
+        }
+
+        private void BuildGoogleAPIClient()
+        {
+            googleSignInOption =new GoogleSignInOptions.Builder(GoogleSignInOptions.DefaultSignIn).RequestEmail().Build();
+           // googleApiClient = new GoogleApiClient.Builder(this)
+                   //.AddApi(Auth.GOOGLE_SIGN_IN_API).(ScopeFile).Build();
+                   
+
+
         }
 
         public void ReplaceFragment()
@@ -94,6 +111,21 @@ namespace SecureWallet
         public void FingerPrintNotEnabledMessage(string message)
         {
             AlertBox.CreateOkAlertBox("Error", message, this, Exit);
+        }
+
+        public void OnConnected(Bundle connectionHint)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnConnectionSuspended(int cause)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnResult(Java.Lang.Object result)
+        {
+            throw new NotImplementedException();
         }
     }
 }
