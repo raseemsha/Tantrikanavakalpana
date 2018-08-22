@@ -9,18 +9,24 @@ using Android.Gms.Common.Apis;
 using Android.Gms.Auth.Api.SignIn;
 using Android.Gms.Auth.Api;
 using Java.Lang;
+using Android.Gms.Drive;
+using Android.Gms.Common;
+using Android.Content;
+using Android.Runtime;
 
 namespace SecureWallet
 {
     
     [Activity(Label = "Secure Wallet", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, WindowSoftInputMode = Android.Views.SoftInput.AdjustPan | SoftInput.StateAlwaysHidden)]
-    public class MainActivity : AppCompatActivity, GoogleApiClient.IConnectionCallbacks, IResultCallback
+    public class MainActivity : AppCompatActivity, GoogleApiClient.IOnConnectionFailedListener
     {
         private View view = null;
         private static SupportToolbar mToolbar;
         public static MainActivity ActivityMain;
-        GoogleSignInOptions googleSignInOption;
         GoogleApiClient googleApiClient;
+
+       
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -32,8 +38,8 @@ namespace SecureWallet
             mToolbar = FindViewById<SupportToolbar>(Resource.Id.toolbar);
             SetSupportActionBar(mToolbar);
             AppBarManager.InitAppBar(this, SupportActionBar);
-           
-           
+
+            BuildGoogleAPIClient();
 
             if (FileOperations.CreateTable<AddInfoModel>())
             {
@@ -44,13 +50,50 @@ namespace SecureWallet
 
         private void BuildGoogleAPIClient()
         {
-            googleSignInOption =new GoogleSignInOptions.Builder(GoogleSignInOptions.DefaultSignIn).RequestEmail().Build();
-           // googleApiClient = new GoogleApiClient.Builder(this)
-                   //.AddApi(Auth.GOOGLE_SIGN_IN_API).(ScopeFile).Build();
-                   
 
+            GoogleSignInOptions googleSignInOption =new GoogleSignInOptions.Builder(GoogleSignInOptions.DefaultSignIn).RequestEmail().Build();
+
+            googleApiClient = new GoogleApiClient.Builder(this).EnableAutoManage(this,this)
+                  .AddApi(DriveClass.API, googleSignInOption)
+                  .AddScope(DriveClass.ScopeAppfolder)
+                  .Build();
 
         }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            try
+            {
+                if (!googleApiClient.IsConnected)
+                {
+                    googleApiClient.Connect();
+                }
+            }
+
+            catch (System.Exception ex)
+            {
+
+            }
+        }
+
+
+       
+
+        void SignIn()
+        {
+            googleApiClient.Connect();
+            
+        }
+
+     
+
+        protected override void OnStop()
+        {
+            base.OnStop();
+            googleApiClient.Disconnect();
+        }
+
 
         public void ReplaceFragment()
         {
@@ -113,19 +156,9 @@ namespace SecureWallet
             AlertBox.CreateOkAlertBox("Error", message, this, Exit);
         }
 
-        public void OnConnected(Bundle connectionHint)
+        public void OnConnectionFailed(ConnectionResult result)
         {
-            throw new NotImplementedException();
-        }
-
-        public void OnConnectionSuspended(int cause)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnResult(Java.Lang.Object result)
-        {
-            throw new NotImplementedException();
+            //Error message if connection failed
         }
     }
 }
