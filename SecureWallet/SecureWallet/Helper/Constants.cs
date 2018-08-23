@@ -34,5 +34,7 @@ namespace SecureWallet
         public const string SetFingerPrintMessage = "Register at least one fingerprint in mobile settings";
         public const string KeyGuardSecurityError = "Lock screen security not enable in mobile settings";
 
+        public const int RC_SIGN_IN = 9001;
+
     }
 }
