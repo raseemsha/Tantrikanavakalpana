@@ -64,6 +64,8 @@ namespace SecureWallet
         public override View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView, ViewGroup parent)
         {
             convertView = layoutInflator.Inflate(Resource.Layout.show_item_child_adapter, parent, false);
+            LinearLayout llUserId= convertView.FindViewById<LinearLayout>(Resource.Id.llUserId);
+            LinearLayout llPassword = convertView.FindViewById<LinearLayout>(Resource.Id.llPassword);
             TextView txtUserId= convertView.FindViewById<TextView>(Resource.Id.txtUserIdValue);
             TextView txtPassword = convertView.FindViewById<TextView>(Resource.Id.txtPasswordValue);
             TextView txtAdditionalInfo = convertView.FindViewById<TextView>(Resource.Id.txtAdditionalInfo);
@@ -84,21 +86,21 @@ namespace SecureWallet
 
             if (string.IsNullOrEmpty(listValues[groupPosition].UserId))
             {
-                txtUserId.Visibility = ViewStates.Gone;
+                llUserId.Visibility = ViewStates.Gone;
             }
 
             else
             {
-                txtUserId.Visibility = ViewStates.Visible;
+                llUserId.Visibility = ViewStates.Visible;
                 txtUserId.Text = listValues[groupPosition].UserId;
             }
             if(string.IsNullOrEmpty(listValues[groupPosition].Password))
             {
-                txtPassword.Visibility = ViewStates.Gone;
+                llPassword.Visibility = ViewStates.Gone;
             }
                 else
             {
-                txtPassword.Visibility = ViewStates.Visible;
+                llPassword.Visibility = ViewStates.Visible;
                 txtPassword.Text = listValues[groupPosition].Password;
             }
                 
