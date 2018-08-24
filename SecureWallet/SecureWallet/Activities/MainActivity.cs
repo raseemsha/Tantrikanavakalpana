@@ -18,14 +18,15 @@ namespace SecureWallet
 {
     
     [Activity(Label = "Secure Wallet", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, WindowSoftInputMode = Android.Views.SoftInput.AdjustPan | SoftInput.StateAlwaysHidden)]
-    public class MainActivity : AppCompatActivity, GoogleApiClient.IOnConnectionFailedListener
+    public class MainActivity : AppCompatActivity, GoogleApiClient.IOnConnectionFailedListener, IResultCallback
     {
         private View view = null;
         private static SupportToolbar mToolbar;
         public static MainActivity ActivityMain;
         GoogleApiClient googleApiClient;
+        
+        IDriveApiDriveContentsResult contentResults;
 
-       
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -159,6 +160,16 @@ namespace SecureWallet
         public void OnConnectionFailed(ConnectionResult result)
         {
             //Error message if connection failed
+        }
+
+        public void OnConnected(Bundle connectionHint)
+        {
+
+        }
+
+        void IResultCallback.OnResult(Java.Lang.Object result)
+        {
+           contentResults =(result).JavaCast<IDriveApiDriveContentsResult>();
         }
     }
 }

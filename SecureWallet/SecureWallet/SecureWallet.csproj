@@ -153,6 +153,7 @@
     <Compile Include="Helper\AlertBox.cs" />
     <Compile Include="Helper\AppBarManager.cs" />
     <Compile Include="Helper\Constants.cs" />
+    <Compile Include="Helper\DriverIntegrationHelper.cs" />
     <Compile Include="Helper\FileOperationManager.cs" />
     <Compile Include="Helper\FileOperations.cs" />
     <Compile Include="Helper\FingerPrintHandler.cs" />
