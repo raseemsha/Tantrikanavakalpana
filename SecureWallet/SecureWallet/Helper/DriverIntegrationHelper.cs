@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Android.App;
-using Android.Content;
+﻿
 using Android.Gms.Common.Apis;
 using Android.Gms.Drive;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+using Google.Apis.Drive.v3;
+using Google.Apis.Drive.v3.Data;
+using Java.IO;
+using System.Collections.Generic;
 
 namespace SecureWallet
 {
@@ -19,25 +13,61 @@ namespace SecureWallet
         GoogleApiClient googleApiClient;
 
         IDriveApiDriveContentsResult contentResults;
+        DriveService driveService;
+
         public DriverIntegrationHelper(GoogleApiClient googleApiClient, IDriveApiDriveContentsResult contentResults)
         {
             this.googleApiClient = googleApiClient;
             this.contentResults = contentResults;
+            driveService = new DriveService();
+
         }
-        public  void CreateFileInAppFolder()
+        public void CreateFileInAppFolder()
         {
-          
-            Task.Run(() =>
+            // var fileMetaData = new File
+            // {
+            //     Name = "PasswordTracker.db",
+            //     Parents = new List<string>()
+            //{
+            //    "appDataFolder"
+            //}
+            // };
+            var writer = new OutputStreamWriter(contentResults.DriveContents.OutputStream);
+            
+
+            MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
+                                                      .SetTitle("PasswordTracker")
+                                                      .SetMimeType("multipart/form-data")
+                                                      .SetStarred(true)
+                                                      .Build();
+
+            //FilesResource.CreateMediaUpload request;
+            using (var stream = new System.IO.FileStream(FileOperationManager.folder+ "/PasswordTracker.db", System.IO.FileMode.Open))
             {
-                
-                MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
-                       .SetTitle("SecureWallet")
-                       .SetMimeType("db")
-                       .Build();
-            DriveClass.DriveApi
-                      .GetAppFolder(googleApiClient)
-                          .CreateFile(googleApiClient, changeSet, contentResults.DriveContents);
-            });
+                //request = driveService.Files.Create(fileMetaData,stream, "multipart/form-data");
+                //request.Fields = "id";
+                //request.Upload();
+                //var file = request.ResponseBody;
+
+                DriveClass.DriveApi.GetAppFolder(googleApiClient).CreateFile(googleApiClient, changeSet, contentResults.DriveContents);
+
+            }
+            
+
         }
+
+        public void ListFiles()
+        {
+            var request = driveService.Files.List();
+            request.Spaces = "appDataFolder";
+            request.Fields = "nextPageToken, files(id, name)";
+            request.PageSize = 10;
+            var result = request.Execute();
+            foreach (var file in result.Files)
+            {
+
+            }
+        }
+
     }
 }

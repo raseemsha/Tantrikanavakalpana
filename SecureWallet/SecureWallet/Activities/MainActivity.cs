@@ -18,15 +18,15 @@ namespace SecureWallet
 {
     
     [Activity(Label = "Secure Wallet", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, WindowSoftInputMode = Android.Views.SoftInput.AdjustPan | SoftInput.StateAlwaysHidden)]
-    public class MainActivity : AppCompatActivity, GoogleApiClient.IOnConnectionFailedListener, IResultCallback
+    public class MainActivity : AppCompatActivity, GoogleApiClient.IOnConnectionFailedListener, IResultCallback, IDriveApiDriveContentsResult, GoogleApiClient.IConnectionCallbacks
     {
         private View view = null;
         private static SupportToolbar mToolbar;
         public static MainActivity ActivityMain;
         GoogleApiClient googleApiClient;
-        
+        static DriverIntegrationHelper driverIntegrationHelper;
         IDriveApiDriveContentsResult contentResults;
-
+        const int REQUEST_CODE_RESOLUTION = 3;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -41,9 +41,10 @@ namespace SecureWallet
             AppBarManager.InitAppBar(this, SupportActionBar);
 
             BuildGoogleAPIClient();
-
+            
             if (FileOperations.CreateTable<AddInfoModel>())
             {
+                
                 ReplaceFragment();
             }
             
@@ -56,7 +57,7 @@ namespace SecureWallet
 
             googleApiClient = new GoogleApiClient.Builder(this).EnableAutoManage(this,this)
                   .AddApi(DriveClass.API, googleSignInOption)
-                  .AddScope(DriveClass.ScopeAppfolder)
+                  .AddScope(DriveClass.ScopeAppfolder).AddConnectionCallbacks(this).AddOnConnectionFailedListener(OnConnectionFailed)
                   .Build();
 
         }
@@ -68,7 +69,7 @@ namespace SecureWallet
             {
                 if (!googleApiClient.IsConnected)
                 {
-                    googleApiClient.Connect();
+                    SignIn();
                 }
             }
 
@@ -84,7 +85,9 @@ namespace SecureWallet
         void SignIn()
         {
             googleApiClient.Connect();
-            
+
+           
+
         }
 
      
@@ -159,18 +162,52 @@ namespace SecureWallet
 
         public void OnConnectionFailed(ConnectionResult result)
         {
-            //Error message if connection failed
+            if (!result.HasResolution)
+            {
+
+                GoogleApiAvailability.Instance.GetErrorDialog(this, result.ErrorCode, 0).Show();
+                return;
+            }
+            try
+            {
+                result.StartResolutionForResult(this, REQUEST_CODE_RESOLUTION);
+            }
+            catch
+            {
+
+            }
+            
         }
 
         public void OnConnected(Bundle connectionHint)
         {
-
+            DriveClass.DriveApi.NewDriveContents(googleApiClient).SetResultCallback(this);
         }
 
         void IResultCallback.OnResult(Java.Lang.Object result)
         {
            contentResults =(result).JavaCast<IDriveApiDriveContentsResult>();
+            if(contentResults.Status.IsSuccess)
+            {
+                driverIntegrationHelper = new DriverIntegrationHelper(googleApiClient, contentResults);
+                driverIntegrationHelper.CreateFileInAppFolder();
+            }
+           
+           // driverIntegrationHelper.ListFiles();
         }
+
+        
+
+        public void OnConnectionSuspended(int cause)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+        public IDriveContents DriveContents => throw new NotImplementedException();
+
+        public Statuses Status => throw new NotImplementedException();
     }
 }
 

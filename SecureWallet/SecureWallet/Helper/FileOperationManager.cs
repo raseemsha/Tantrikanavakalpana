@@ -12,7 +12,7 @@ namespace SecureWallet
     {
         // Internal Filepath      
         static string internalSqlLiteFilepath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-        static string folder = null;
+      internal  static string folder = null;
         static string folderName="/PasswordTracker/";
         static string DBName = "PasswordTracker.db";
         Java.IO.File dir = null;
