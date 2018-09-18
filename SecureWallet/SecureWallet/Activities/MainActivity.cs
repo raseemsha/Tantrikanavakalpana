@@ -1,22 +1,18 @@
 ﻿using Android.App;
-using Android.Widget;
+using Android.Gms.Auth.Api.SignIn;
+using Android.Gms.Common;
+using Android.Gms.Common.Apis;
+using Android.Gms.Drive;
 using Android.OS;
-using Android.Views;
+using Android.Runtime;
 using Android.Support.V7.App;
+using Android.Views;
 using System;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
-using Android.Gms.Common.Apis;
-using Android.Gms.Auth.Api.SignIn;
-using Android.Gms.Auth.Api;
-using Java.Lang;
-using Android.Gms.Drive;
-using Android.Gms.Common;
-using Android.Content;
-using Android.Runtime;
 
 namespace SecureWallet
 {
-    
+
     [Activity(Label = "Secure Wallet", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, WindowSoftInputMode = Android.Views.SoftInput.AdjustPan | SoftInput.StateAlwaysHidden)]
     public class MainActivity : AppCompatActivity, GoogleApiClient.IOnConnectionFailedListener, IResultCallback, IDriveApiDriveContentsResult, GoogleApiClient.IConnectionCallbacks
     {
@@ -40,7 +36,7 @@ namespace SecureWallet
             SetSupportActionBar(mToolbar);
             AppBarManager.InitAppBar(this, SupportActionBar);
 
-            BuildGoogleAPIClient();
+           // BuildGoogleAPIClient();
             
             if (FileOperations.CreateTable<AddInfoModel>())
             {
@@ -65,18 +61,18 @@ namespace SecureWallet
         protected override void OnStart()
         {
             base.OnStart();
-            try
-            {
-                if (!googleApiClient.IsConnected)
-                {
-                    SignIn();
-                }
-            }
+            //try
+            //{
+            //    if (!googleApiClient.IsConnected)
+            //    {
+            //        SignIn();
+            //    }
+            //}
 
-            catch (System.Exception ex)
-            {
+            //catch (System.Exception ex)
+            //{
 
-            }
+            //}
         }
 
 
@@ -95,7 +91,7 @@ namespace SecureWallet
         protected override void OnStop()
         {
             base.OnStop();
-            googleApiClient.Disconnect();
+           // googleApiClient.Disconnect();
         }
 
 
@@ -116,8 +112,7 @@ namespace SecureWallet
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         { 
-             OnBackPressed();
-               
+            
             return base.OnOptionsItemSelected(item);
         }
 

@@ -19,6 +19,7 @@ using Android.Support.V7.App;
 using Android;
 using Android.Support.V4.App;
 using Android.Security.Keystore;
+using Android.Views.InputMethods;
 
 namespace SecureWallet
 {
@@ -29,6 +30,7 @@ namespace SecureWallet
         private LinearLayout llfabUpdateData;
         private LinearLayout llfabAddData;
         private List<AddInfoModel> lstStoredData;
+        private List<AddInfoModel> OrginallstStoredData;
         bool isPlus = true;
         StoredInfoAdapter storedInfoAdapter;
         ExpandableListView explstTrainingTopics;
@@ -42,11 +44,12 @@ namespace SecureWallet
         private View viewExpLst;
         AutenticationDialog autDialog;
         private LinearLayout llTransparent;
-
+        Android.Support.V7.Widget.SearchView searchView;
         public static DateTime timeOnUnsucessfulAttempts;
         public StoredDetails()
         {
             lstStoredData = new List<AddInfoModel>();
+            OrginallstStoredData = new List<AddInfoModel>();
             timeOnUnsucessfulAttempts = DateTime.MinValue;
         }
         public override void OnCreate(Bundle savedInstanceState)
@@ -55,6 +58,7 @@ namespace SecureWallet
             keyguardManager= (KeyguardManager)Activity.GetSystemService(Context.KeyguardService);
             fingerprintManager= (FingerprintManager)Activity.GetSystemService(Context.FingerprintService);
             CheckFingerPrintStatus();
+            HasOptionsMenu = true;
         }
 
         private void CheckFingerPrintStatus()
@@ -147,11 +151,83 @@ namespace SecureWallet
             
         }
 
+        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
+        {
+            base.OnCreateOptionsMenu(menu, inflater);
+            inflater.Inflate(Resource.Menu.search,menu);
+            var searchItem = menu.FindItem(Resource.Id.action_search);
+            searchView = searchItem.ActionView.JavaCast<Android.Support.V7.Widget.SearchView>();
+         
+            searchView.QueryTextSubmit += (sender, args) =>
+            {
+                FilterTheDataAsPerSearch(args.Query);
+                args.Handled = true;
+
+            };
+            searchView.QueryTextChange += (sender, args) =>
+              {
+                  if (string.IsNullOrEmpty(args.NewText))
+                  {
+                      BindOrginalData();
+                  }
+                  
+              };
+           
+           
+        }
+
+      
+
+        private void SearchView_Close(object sender, Android.Support.V7.Widget.SearchView.CloseEventArgs e)
+        {
+
+            BindOrginalData();
+
+            e.Handled = true;
+            
+        }
+
+        private void BindOrginalData()
+        {
+            lstStoredData = OrginallstStoredData;
+
+            BindData();
+        }
+
+
+        /// <summary>
+        /// This method will filter the displayed data as per the search query
+        /// </summary>
+        /// <param name="searhQuery"></param>
+        private void FilterTheDataAsPerSearch(string searchQuery)
+        {
+           if(string.IsNullOrEmpty(searchQuery))
+            {
+                lstStoredData = OrginallstStoredData;
+              
+            }
+            else
+            {
+                
+                lstStoredData = lstStoredData.Where(x => x.Title.ToUpper().Contains(searchQuery.ToUpper())).Select(x=>x).ToList();
+                
+            }
+                       
+            BindData();
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+
+            return base.OnOptionsItemSelected(item);
+        }
+
         private void GetAndShowData()
         {
             try
             {
                 lstStoredData = FileOperations.ReadFromDevice<AddInfoModel>();
+                OrginallstStoredData = lstStoredData;
                 if (lstStoredData != null && lstStoredData.Count > 0)
                 {
                     lstStoredData = lstStoredData.OrderByDescending(x => x.HitCount).ToList();

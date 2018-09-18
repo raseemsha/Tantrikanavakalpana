@@ -261,9 +261,14 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\ic_edit.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\search.xml" />
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap\appicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\search_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
