@@ -19,7 +19,7 @@ using Android.Support.V7.App;
 using Android;
 using Android.Support.V4.App;
 using Android.Security.Keystore;
-using Android.Views.InputMethods;
+
 
 namespace SecureWallet
 {
@@ -404,6 +404,7 @@ namespace SecureWallet
 
                     if (cryptoObject != null)
                     {
+                        
                         Android.Support.V4.App.FragmentTransaction fragmentTransaction = FragmentManager.BeginTransaction();
                         Android.Support.V4.App.Fragment previousFragment = FragmentManager.FindFragmentByTag("AuthenticateDialog");
                         if (previousFragment != null)
@@ -414,6 +415,7 @@ namespace SecureWallet
 
                         autDialog.EventTrigger += delegate
                         {
+                            
                             lstStoredData[groupPosition].HitCount = lstStoredData[groupPosition].HitCount+1;
                             var updateQuery = string.Format("update AddInfoModel set HitCount ={0} where Title ='{1}'", lstStoredData[groupPosition].HitCount, lstStoredData[groupPosition].Title);
                             FileOperations.UpdateToDevice(updateQuery);

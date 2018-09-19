@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
+using Android.Views.InputMethods;
 using Android.Widget;
 
 namespace SecureWallet
@@ -36,6 +37,24 @@ namespace SecureWallet
             else
             {
                 return false;
+            }
+        }
+
+        public static void HideKeyboard(Context context, View view)
+        {
+            try
+            {
+                if (view != null && context != null)
+                {
+                    // Hides the key board
+                    var imm = (InputMethodManager)context.GetSystemService(Android.Content.Context.InputMethodService);
+                   
+                    var result = imm.HideSoftInputFromWindow(view.WindowToken, 0);
+                  
+                }
+            }
+            catch
+            {
             }
         }
 

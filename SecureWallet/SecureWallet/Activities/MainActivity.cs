@@ -111,8 +111,18 @@ namespace SecureWallet
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
-        { 
-            
+        {
+
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    if (AppBarManager.isBackButton)
+                    {
+                        OnBackPressed();
+                    }
+                   
+                    return true;
+            }
             return base.OnOptionsItemSelected(item);
         }
 

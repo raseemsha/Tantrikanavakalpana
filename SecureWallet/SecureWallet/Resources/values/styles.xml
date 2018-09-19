@@ -3,6 +3,7 @@
 
   <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="android:windowBackground">@color/white</item>
+    <item name="android:itemBackground">@color/white</item>
   </style>
 
   <style name="Base_ToolbarStyle" parent="Widget.AppCompat.Light.ActionBar.Solid">

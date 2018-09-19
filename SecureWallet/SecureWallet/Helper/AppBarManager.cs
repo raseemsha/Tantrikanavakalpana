@@ -14,7 +14,7 @@ namespace SecureWallet
         private static Drawable navIconBack;
         
         private static Android.Support.V7.App.ActionBar mActionBar = null;
-
+        public static bool isBackButton = false;
         /// <summary>
         /// Initialise the app bar 
         /// </summary>
@@ -41,6 +41,7 @@ namespace SecureWallet
         public static void HideIcons()
         {
             mActionBar.SetDisplayHomeAsUpEnabled(false);
+            isBackButton = false;
         }
         /// <summary>
         /// Show the back button in the App bar
@@ -50,7 +51,7 @@ namespace SecureWallet
         {
             mActionBar.SetDisplayHomeAsUpEnabled(true);
             mActionBar.SetHomeAsUpIndicator(navIconBack);
-            
+            isBackButton = true;
         }
 
       
