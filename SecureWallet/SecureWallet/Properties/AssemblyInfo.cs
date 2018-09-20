@@ -10,7 +10,7 @@ using Android.App;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Raseem")]
-[assembly: AssemblyProduct("PasswordTracker")]
+[assembly: AssemblyProduct("SecureWallet")]
 [assembly: AssemblyCopyright("Copyright © RaseemSha 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
